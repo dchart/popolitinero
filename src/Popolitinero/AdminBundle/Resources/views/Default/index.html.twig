@@ -1,1 +1,10 @@
-Hello {{ name }}!
+{% extends "::admin.html.twig" %}
+
+{% block title %}Tableau de bord | {{ parent() }}{% endblock %}
+
+{% block body %}
+
+<h1><em>Popolitinero</em> : Hello {{ name }}!</h1>
+<h2>{{ hubslug }}</h2>
+	
+{% endblock %}

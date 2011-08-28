@@ -1,7 +1,7 @@
 PopolitineroAdminBundle:
     resource: "@PopolitineroAdminBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /admin/{hubslug}
 
 PopolitineroDefaultBundle:
     resource: "@PopolitineroDefaultBundle/Controller/"
