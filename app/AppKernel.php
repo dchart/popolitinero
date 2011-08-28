@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new Popolitinero\DefaultBundle\PopolitineroDefaultBundle(),
             new Symfony\Bundle\DoctrineFixturesBundle\DoctrineFixturesBundle(),
             new Popolitinero\AdminBundle\PopolitineroAdminBundle(),
+            new SamJ\DoctrineSluggableBundle\SamJDoctrineSluggableBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

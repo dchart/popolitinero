@@ -2,6 +2,8 @@
 
 namespace Popolitinero\DefaultBundle\Entity;
 
+use SamJ\DoctrineSluggableBundle\SluggableInterface;
+
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -11,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table()
  * @ORM\Entity
  */
-class Hub
+class Hub implements SluggableInterface
 {
     /**
      * @var integer $id
@@ -54,6 +56,13 @@ class Hub
      * @Assert\Max(limit = "95", message = "Le taux de couverture doit être compris entre 50 et 95% !")
      */
     private $coverage_ratio_of_user_needs = 80;
+
+    /**
+     * @var string $slug
+     *
+     * @ORM\Column(type="string")
+     */
+    private $slug;
 
 
     /**
@@ -144,5 +153,22 @@ class Hub
     public function getCoverageRatioOfUserNeeds($coverage_ratio_of_user_needs)
     {
         return $this->coverage_ratio_of_user_needs;
+    }
+    
+    /* Slug */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    public function setSlug($slug)
+    {
+        if (!empty($this->slug)) return false;
+        $this->slug = $slug;
+    }
+
+    public function getSlugFields()
+    {
+        return $this->getName();
     }
 }
