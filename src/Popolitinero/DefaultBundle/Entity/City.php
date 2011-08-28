@@ -48,6 +48,14 @@ class City
      * @ORM\ManyToOne(targetEntity="Popolitinero\DefaultBundle\Entity\Hub")
      */
     private $hub;
+    
+    /**
+     * @var string __toString
+     */
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     /**
      * Get id
