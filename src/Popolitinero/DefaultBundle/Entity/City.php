@@ -50,6 +50,20 @@ class City
     private $hub;
     
     /**
+     * @var decimal $latitude
+     *
+     * @ORM\Column(name="latitude", type="decimal")
+     */
+    private $latitude;
+
+    /**
+     * @var decimal $longitude
+     *
+     * @ORM\Column(name="longitude", type="decimal")
+     */
+    private $longitude;
+    
+    /**
      * @var string __toString
      */
     public function __toString()
@@ -145,5 +159,45 @@ class City
     public function getHub()
     {
         return $this->hub;
+    }
+    
+    /**
+     * Set latitude
+     *
+     * @param decimal $latitude
+     */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+    }
+
+    /**
+     * Get latitude
+     *
+     * @return decimal 
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * Set longitude
+     *
+     * @param decimal $longitude
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+    }
+
+    /**
+     * Get longitude
+     *
+     * @return decimal 
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
     }
 }
