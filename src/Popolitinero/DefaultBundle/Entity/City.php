@@ -45,7 +45,7 @@ class City
     /**
      * @var object $hub
      *
-     * @ORM\ManyToOne(targetEntity="Popolitinero\DefaultBundle\Entity\Hub")
+     * @ORM\ManyToOne(targetEntity="Popolitinero\DefaultBundle\Entity\Hub", cascade={"all"})
      */
     private $hub;
     
