@@ -1,3 +1,8 @@
+PopolitineroAdminBundle:
+    resource: "@PopolitineroAdminBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 PopolitineroDefaultBundle:
     resource: "@PopolitineroDefaultBundle/Controller/"
     type:     annotation
