@@ -1,4 +1,4 @@
-PopolItinero
+Popolitinero
 ============
 
 Projet en développement.
