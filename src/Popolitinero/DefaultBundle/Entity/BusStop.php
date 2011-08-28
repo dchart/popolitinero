@@ -5,12 +5,12 @@ namespace Popolitinero\DefaultBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Popolitinero\DefaultBundle\Entity\Stop
+ * Popolitinero\DefaultBundle\Entity\BusStop
  *
  * @ORM\Table()
  * @ORM\Entity
  */
-class Stop
+class BusStop
 {
     /**
      * @var integer $id

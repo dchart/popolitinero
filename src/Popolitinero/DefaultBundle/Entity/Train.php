@@ -24,7 +24,7 @@ class Train
     /**
      * @var object $bus_stop_departure
      *
-     * @ORM\OneToOne(targetEntity="Popolitinero\DefaultBundle\Entity\Stop")
+     * @ORM\OneToOne(targetEntity="Popolitinero\DefaultBundle\Entity\BusStop")
      */
     private $bus_stop_departure;
 
@@ -38,7 +38,7 @@ class Train
     /**
      * @var object $bus_stop_arrival
      *
-     * @ORM\OneToOne(targetEntity="Popolitinero\DefaultBundle\Entity\Stop")
+     * @ORM\OneToOne(targetEntity="Popolitinero\DefaultBundle\Entity\BusStop")
      */
     private $bus_stop_arrival;
 
@@ -72,7 +72,7 @@ class Train
      *
      * @param object $bus_stop_departure
      */
-    public function setBusStopDeparture(\Popolitinero\DefaultBundle\Entity\Stop $bus_stop_departure)
+    public function setBusStopDeparture(\Popolitinero\DefaultBundle\Entity\BusStop $bus_stop_departure)
     {
         $this->bus_stop_departure = $bus_stop_departure;
     }
@@ -112,7 +112,7 @@ class Train
      *
      * @param object $bus_stop_arrival
      */
-    public function setBusStopArrival(\Popolitinero\DefaultBundle\Entity\Stop $bus_stop_arrival)
+    public function setBusStopArrival(\Popolitinero\DefaultBundle\Entity\BusStop $bus_stop_arrival)
     {
         $this->bus_stop_arrival = $bus_stop_arrival;
     }
