@@ -29,25 +29,11 @@ class Train
     private $bus_stop_departure;
 
     /**
-     * @var datetime $departure
-     *
-     * @ORM\Column(name="departure", type="datetime")
-     */
-    private $departure;
-
-    /**
      * @var object $bus_stop_arrival
      *
      * @ORM\OneToOne(targetEntity="Popolitinero\DefaultBundle\Entity\BusStop")
      */
     private $bus_stop_arrival;
-
-    /**
-     * @var datetime $arrival
-     *
-     * @ORM\Column(name="arrival", type="datetime")
-     */
-    private $arrival;
 
     /**
      * @var float $price
@@ -88,26 +74,6 @@ class Train
     }
 
     /**
-     * Set departure
-     *
-     * @param datetime $departure
-     */
-    public function setDeparture($departure)
-    {
-        $this->departure = $departure;
-    }
-
-    /**
-     * Get departure
-     *
-     * @return datetime 
-     */
-    public function getDeparture()
-    {
-        return $this->departure;
-    }
-
-    /**
      * Set bus_stop_arrival
      *
      * @param object $bus_stop_arrival
@@ -127,26 +93,6 @@ class Train
         return $this->bus_stop_arrival;
     }
     
-    /**
-     * Set arrival
-     *
-     * @param datetime $arrival
-     */
-    public function setArrival($arrival)
-    {
-        $this->arrival = $arrival;
-    }
-
-    /**
-     * Get arrival
-     *
-     * @return datetime 
-     */
-    public function getArrival()
-    {
-        return $this->arrival;
-    }
-
     /**
      * Set price
      *

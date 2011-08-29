@@ -36,6 +36,13 @@ class BusStop
     private $city;
 
     /**
+     * @var boolean $is_famous
+     *
+     * @ORM\Column(name="is_famous", type="boolean")
+     */
+    private $is_famous;
+
+    /**
      * @var boolean $is_terminus
      *
      * @ORM\Column(name="is_terminus", type="boolean")
@@ -48,6 +55,14 @@ class BusStop
      * @ORM\Column(name="is_on_demand", type="boolean")
      */
     private $is_on_demand;
+
+    /**
+     * @var boolean $is_train_connected
+     *
+     * @ORM\Column(name="is_train_connected", type="boolean")
+     */
+    private $is_train_connected;
+
 
     /**
      * @var decimal $latitude
@@ -115,6 +130,26 @@ class BusStop
     }
 
     /**
+     * Set is_famous
+     *
+     * @param boolean $isFamous
+     */
+    public function setIsFamous($isFamous)
+    {
+        $this->is_famous = $isFamous;
+    }
+
+    /**
+     * Get is_famous
+     *
+     * @return boolean 
+     */
+    public function getIsFamous()
+    {
+        return $this->is_famous;
+    }
+
+    /**
      * Set is_terminus
      *
      * @param boolean $isTerminus
@@ -152,6 +187,26 @@ class BusStop
     public function getIsOnDemand()
     {
         return $this->is_on_demand;
+    }
+
+    /**
+     * Set is_train_connected
+     *
+     * @param boolean $isTrainConnected
+     */
+    public function setIsTrainConnected($isTrainConnected)
+    {
+        $this->is_train_connected = $isTrainConnected;
+    }
+
+    /**
+     * Get is_train_connected
+     *
+     * @return boolean 
+     */
+    public function getIsTrainConnected()
+    {
+        return $this->is_train_connected;
     }
 
     /**

@@ -34,6 +34,13 @@ class Bus
      * @ORM\Column(name="nb_passengers", type="integer", length=3)
      */
     private $nb_passengers;
+    
+    /**
+     * @var date $start_exploitation
+     *
+     * @ORM\Column(name="start_exploitation", type="date")
+     */
+    private $start_exploitation;
 
 
     /**
@@ -84,5 +91,25 @@ class Bus
     public function getNbPassengers()
     {
         return $this->nb_passengers;
+    }
+    
+    /**
+     * Set start_exploitation
+     *
+     * @param date $startExploitation
+     */
+    public function setStartExploitation($startExploitation)
+    {
+        $this->start_exploitation = $startExploitation;
+    }
+
+    /**
+     * Get implementation_date
+     *
+     * @return date 
+     */
+    public function getImplementationDate()
+    {
+        return $this->implementation_date;
     }
 }

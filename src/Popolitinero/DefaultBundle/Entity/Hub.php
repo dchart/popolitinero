@@ -58,6 +58,13 @@ class Hub implements SluggableInterface
     private $coverage_ratio_of_user_needs = 80;
 
     /**
+     * @var boolean $is_active
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $is_active;
+
+    /**
      * @var string $slug
      *
      * @ORM\Column(type="string")
@@ -153,6 +160,26 @@ class Hub implements SluggableInterface
     public function getCoverageRatioOfUserNeeds($coverage_ratio_of_user_needs)
     {
         return $this->coverage_ratio_of_user_needs;
+    }
+    
+    /**
+     * Set is_active
+     *
+     * @param boolean $is_active
+     */
+    public function setIsActive($is_active)
+    {
+        $this->is_active = $is_active;
+    }
+
+    /**
+     * Get is_active
+     *
+     * @return boolean
+     */
+    public function getIsActive()
+    {
+        return $this->is_active;
     }
     
     /* Slug */
