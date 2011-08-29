@@ -3,16 +3,19 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>{% block title %}Administration de Popolitinero{% endblock %}</title>
-        
-    {% stylesheets output='css/compressed.css' filter='yui_css' '@PopolitineroAdminBundle/Resources/public/css/main.css' %}
+{% stylesheets output='css/compressed.css' filter='yui_css' '@PopolitineroAdminBundle/Resources/public/css/main.css' %}
         <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
-    {% endstylesheets %}
-        
-        {% block stylesheets %}{% endblock %}
+{% endstylesheets %}
+{% block stylesheets %}{% endblock %}
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+        <script type="text/javascript">
+          google.load("jquery", "1.6.2");
+          google.load('maps', '3', {other_params:'sensor=true'});
+        </script>
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+{% block body %}{% endblock %}
+{% block javascripts %}{% endblock %}
     </body>
 </html>

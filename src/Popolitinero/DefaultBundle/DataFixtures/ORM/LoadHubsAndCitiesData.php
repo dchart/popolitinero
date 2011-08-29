@@ -20,6 +20,7 @@ class LoadHubsAndCitiesData implements FixtureInterface
         $cognac->setPostalCode('16100');
         $cognac->setLatitude('45.693187');
         $cognac->setLongitude('-0.325025');
+        $cognac->setInhabitants(19006);
         $cc_cognac->setMasterCity($cognac);
         $manager->persist($cc_cognac);
         $cognac->setHub($cc_cognac);
@@ -32,6 +33,7 @@ class LoadHubsAndCitiesData implements FixtureInterface
         $ars->setHub($cc_cognac);
         $ars->setLatitude('45.642904');
         $ars->setLongitude('-0.383706');
+        $ars->setInhabitants(722);
         $manager->persist($ars);
         
         $boutiers_saint_trojan = new City();
@@ -41,6 +43,7 @@ class LoadHubsAndCitiesData implements FixtureInterface
         $boutiers_saint_trojan->setHub($cc_cognac);
         $boutiers_saint_trojan->setLatitude('45.712277');
         $boutiers_saint_trojan->setLongitude('-0.299635');
+        $boutiers_saint_trojan->setInhabitants('1351');
         $manager->persist($boutiers_saint_trojan);
         
         $breville = new City();
@@ -50,6 +53,7 @@ class LoadHubsAndCitiesData implements FixtureInterface
         $breville->setHub($cc_cognac);
         $breville->setLatitude('45.796430');
         $breville->setLongitude('-0.261655');
+        $breville->setInhabitants('521');
         $manager->persist($breville);
         
         $chateaubernard = new City();
@@ -59,6 +63,7 @@ class LoadHubsAndCitiesData implements FixtureInterface
         $chateaubernard->setHub($cc_cognac);
         $chateaubernard->setLatitude('45.673629');
         $chateaubernard->setLongitude('-0.315696');
+        $chateaubernard->setInhabitants('3899');
         $manager->persist($chateaubernard);
         
         $cherves_richemont = new City();
@@ -68,6 +73,7 @@ class LoadHubsAndCitiesData implements FixtureInterface
         $cherves_richemont->setHub($cc_cognac);
         $cherves_richemont->setLatitude('45.743984');
         $cherves_richemont->setLongitude('-0.357378');
+        $cherves_richemont->setInhabitants('2420');
         $manager->persist($cherves_richemont);        
         
         $gimeux = new City();
@@ -77,6 +83,7 @@ class LoadHubsAndCitiesData implements FixtureInterface
         $gimeux->setHub($cc_cognac);
         $gimeux->setLatitude('45.635943');
         $gimeux->setLongitude('-0.369244');
+        $gimeux->setInhabitants('716');
         $manager->persist($gimeux);
         
         $javrezac = new City();
@@ -86,6 +93,7 @@ class LoadHubsAndCitiesData implements FixtureInterface
         $javrezac->setHub($cc_cognac);
         $javrezac->setLatitude('45.701245');
         $javrezac->setLongitude('-0.358279');
+        $javrezac->setInhabitants('646');
         $manager->persist($javrezac);
         
         $louzac_saint_andre = new City();
@@ -95,6 +103,7 @@ class LoadHubsAndCitiesData implements FixtureInterface
         $louzac_saint_andre->setHub($cc_cognac);
         $louzac_saint_andre->setLatitude('45.714911');
         $louzac_saint_andre->setLongitude('-0.402997');
+        $louzac_saint_andre->setInhabitants('996');
         $manager->persist($louzac_saint_andre);
         
         $merpins = new City();
@@ -104,6 +113,7 @@ class LoadHubsAndCitiesData implements FixtureInterface
         $merpins->setHub($cc_cognac);
         $merpins->setLatitude('45.673094');
         $merpins->setLongitude('-0.363708');
+        $merpins->setInhabitants('1039');
         $manager->persist($merpins);
         
         $mesnac = new City();
@@ -113,6 +123,7 @@ class LoadHubsAndCitiesData implements FixtureInterface
         $mesnac->setHub($cc_cognac);
         $mesnac->setLatitude('45.776675');
         $mesnac->setLongitude('-0.358558');
+        $mesnac->setInhabitants('346');
         $manager->persist($mesnac);
         
         $saint_brice = new City();
@@ -122,6 +133,7 @@ class LoadHubsAndCitiesData implements FixtureInterface
         $saint_brice->setHub($cc_cognac);
         $saint_brice->setLatitude('45.687996');
         $saint_brice->setLongitude('-0.272620');
+        $saint_brice->setInhabitants('1072');
         $manager->persist($cc_cognac);
         
         $saint_laurent_de_cognac = new City();
@@ -131,6 +143,7 @@ class LoadHubsAndCitiesData implements FixtureInterface
         $saint_laurent_de_cognac->setHub($cc_cognac);
         $saint_laurent_de_cognac->setLatitude('45.697139');
         $saint_laurent_de_cognac->setLongitude('-0.408103');
+        $saint_laurent_de_cognac->setInhabitants('894');
         $manager->persist($saint_laurent_de_cognac);
         
         $saint_sulpice_de_cognac = new City();
@@ -140,6 +153,7 @@ class LoadHubsAndCitiesData implements FixtureInterface
         $saint_sulpice_de_cognac->setHub($cc_cognac);
         $saint_sulpice_de_cognac->setLatitude('45.760090');
         $saint_sulpice_de_cognac->setLongitude('-0.381303');
+        $saint_sulpice_de_cognac->setInhabitants('1252');
         $manager->persist($saint_sulpice_de_cognac);
         
         /* CC du Pays santon **************************************************/

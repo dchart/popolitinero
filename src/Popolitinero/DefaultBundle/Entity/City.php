@@ -3,6 +3,7 @@
 namespace Popolitinero\DefaultBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Popolitinero\DefaultBundle\Entity\City
@@ -25,6 +26,7 @@ class City
      * @var string $insee_code
      *
      * @ORM\Column(name="insee_code", type="string", length=5)
+     * @Assert\NotBlank()
      */
     private $insee_code;
 
@@ -32,6 +34,7 @@ class City
      * @var string $name
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -39,6 +42,7 @@ class City
      * @var string $postal_code
      *
      * @ORM\Column(name="postal_code", type="string", length=5)
+     * @Assert\NotBlank()
      */
     private $postal_code;
     
@@ -53,6 +57,7 @@ class City
      * @var decimal $latitude
      *
      * @ORM\Column(name="latitude", type="decimal")
+     * @Assert\NotBlank()
      */
     private $latitude;
 
@@ -60,8 +65,16 @@ class City
      * @var decimal $longitude
      *
      * @ORM\Column(name="longitude", type="decimal")
+     * @Assert\NotBlank()
      */
     private $longitude;
+
+    /**
+     * @var integer $inhabitants
+     *
+     * @ORM\Column(name="inhabitants", type="integer")
+     */
+    private $inhabitants = 0;
     
     /**
      * @var string __toString
@@ -199,5 +212,25 @@ class City
     public function getLongitude()
     {
         return $this->longitude;
+    }
+    
+    /**
+     * Set inhabitants
+     *
+     * @param integer $inhabitants
+     */
+    public function setInhabitants($inhabitants)
+    {
+        $this->inhabitants = $inhabitants;
+    }
+
+    /**
+     * Get inhabitants
+     *
+     * @return integer 
+     */
+    public function getInhabitants()
+    {
+        return $this->inhabitants;
     }
 }
