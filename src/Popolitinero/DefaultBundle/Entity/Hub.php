@@ -62,7 +62,7 @@ class Hub implements SluggableInterface
      *
      * @ORM\Column(type="boolean")
      */
-    private $is_active;
+    private $is_active = false;
 
     /**
      * @var string $slug

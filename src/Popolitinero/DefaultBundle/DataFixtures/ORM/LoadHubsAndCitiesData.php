@@ -22,6 +22,7 @@ class LoadHubsAndCitiesData implements FixtureInterface
         $cognac->setLongitude('-0.325025');
         $cognac->setInhabitants(19006);
         $cc_cognac->setMasterCity($cognac);
+        $cc_cognac->setIsActive(true);
         $manager->persist($cc_cognac);
         $cognac->setHub($cc_cognac);
         $manager->persist($cognac);
@@ -167,6 +168,7 @@ class LoadHubsAndCitiesData implements FixtureInterface
         $saintes->setLatitude('45.748');
         $saintes->setLongitude('-0.638');
         $cc_pays_santon->setMasterCity($saintes);
+        $cc_pays_santon->setIsActive(true);
         $manager->persist($cc_pays_santon);
         $saintes->setHub($cc_pays_santon);
         $manager->persist($saintes);
