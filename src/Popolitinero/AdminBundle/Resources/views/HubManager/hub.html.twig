@@ -1,0 +1,54 @@
+{% extends "::admin.html.twig" %}
+{% block title %}Gestion du réseau ({{hub.fullname}}) | {{ parent() }}{% endblock %}
+{% block gmapsjs %}
+        <script type="text/javascript">
+          function initialize()
+          {
+          
+            var hub         = new google.maps.LatLng({{hub.masterCity.latitude}},{{hub.masterCity.longitude}});
+            var barycenter  = new google.maps.LatLng({{barycenter.latitude}},{{barycenter.longitude}});
+            var options     = {zoom:11,center:barycenter,mapTypeId:google.maps.MapTypeId.TERRAIN}
+            var map         = new google.maps.Map(document.getElementById("map-canvas"),options);
+            var polyOptions = {strokeColor:'#FF0000',strokeOpacity:0.5,strokeWeight:1,map:map};
+            {% for hubcity in hub.cities %}
+            
+            var marker{{hubcity.id}} = new google.maps.Marker({position:new google.maps.LatLng({{hubcity.latitude}},{{hubcity.longitude}}),map:map,title:"{{hubcity}}"});
+            var poly{{hubcity.id}} = new google.maps.Polyline(polyOptions).setPath([hub,marker{{hubcity.id}}.getPosition()]);
+            google.maps.event.addListener(marker{{hubcity.id}}, 'click', function() {
+              new google.maps.InfoWindow({content: '<div class="infowindow"><h2>{{hubcity}}</h2></div>'}).open(map,marker{{hubcity.id}});
+            });
+            {% endfor %}
+            
+          }
+        </script>
+{% endblock %}
+{% block bodyonload %} onload="initialize()"{% endblock %}
+{% block breadcrumb %}
+        <ul class="xbreadcrumbs" id="breadcrumbs">
+            <li>
+               <a href="{{ path('popolitinero_admin_hubmanager_index') }}" class="home">Popolitinero</a>
+               <ul>
+                   <li><a href="#">Supervisation</a></li>
+                   <li><a href="{{ path('popolitinero_admin_hubmanager_hub', { 'hubslug': 'cc-cognac' }) }}">CC Cognac</a></li>
+                   <li><a href="{{ path('popolitinero_admin_hubmanager_hub', { 'hubslug': 'cc-pays-santon' }) }}">CC Pays santon</a></li>
+               </ul>
+            </li>
+            <li class="current"><a href="{{ path('popolitinero_admin_hubmanager_hub', { 'hubslug': hubslug }) }}">{{hub.fullname}}</a>
+              <ul>
+                <li><a href="#">Caractéristiques</a></li>
+                <li><a href="#">Arrêts de bus</a></li>
+                <li><a href="#">Lignes de bus</a></li>
+                <li><a href="#">Jonctions Bus/TER</a></li>
+                <li><a href="#">Perturbations</a></li>
+                <li><a href="#">Usagers</a></li>
+                <li><a href="#">Qualité continue</a></li>
+                <li><a href="#">Ressources humaines</a></li>
+                <li><a href="#">Flotte de bus</a></li>
+                <li><a href="#">Marchés publics</a></li>
+              </ul>
+            </li>
+        </ul>
+{% endblock %}
+{% block body %}
+        <div id="map-canvas"></div>
+{% endblock %}

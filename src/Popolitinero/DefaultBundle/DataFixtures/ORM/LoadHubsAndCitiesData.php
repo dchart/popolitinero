@@ -12,7 +12,7 @@ class LoadHubsAndCitiesData implements FixtureInterface
     {
         /* CC de Cognac *******************************************************/
         $cc_cognac = new Hub();
-        $cc_cognac->setName('CC de Cognac');
+        $cc_cognac->setName('CC Cognac');
         $cc_cognac->setFullname('Communauté de communes de Cognac');
         $cognac = new City();
         $cognac->setInseeCode('16102');
@@ -135,7 +135,7 @@ class LoadHubsAndCitiesData implements FixtureInterface
         $saint_brice->setLatitude('45.687996');
         $saint_brice->setLongitude('-0.272620');
         $saint_brice->setInhabitants('1072');
-        $manager->persist($cc_cognac);
+        $manager->persist($saint_brice);
         
         $saint_laurent_de_cognac = new City();
         $saint_laurent_de_cognac->setInseeCode('16330');
@@ -159,7 +159,7 @@ class LoadHubsAndCitiesData implements FixtureInterface
         
         /* CC du Pays santon **************************************************/
         $cc_pays_santon = new Hub();
-        $cc_pays_santon->setName('CC du Pays santon');
+        $cc_pays_santon->setName('CC Pays santon');
         $cc_pays_santon->setFullname('Communauté de communes du Pays santon');
         $saintes = new City();
         $saintes->setInseeCode('17415');

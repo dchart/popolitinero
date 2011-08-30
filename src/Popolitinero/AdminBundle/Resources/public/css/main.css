@@ -30,6 +30,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	font-family: "sans serif";
 }
 ol, ul {
 	list-style: none;
@@ -45,4 +46,27 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+html, body {
+  height: 100%;
+}
+#map-canvas {
+  height: 95%;
+  width: 100%;
+  border-top: 3px double #6a579b;
+  margin-top: -3px;
+}
+h2{
+  font-size: 18px;
+  font-weight: bolder;
+  text-align: center;
+  margin: 5px;
+  padding: 5px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 3px #6a579b;
+  border-bottom: 2px solid #6a579b;
+}
+.infowindow{
+  width: 500px;
+  padding: 10px;
 }

@@ -1,0 +1,42 @@
+{% extends "::admin.html.twig" %}
+{% block title %}Vue générale du réseau | {{ parent() }}{% endblock %}
+{% block gmapsjs %}
+        <script type="text/javascript">
+          function initialize()
+          {
+          
+            var barycenter  = new google.maps.LatLng({{barycenter.latitude}},{{barycenter.longitude}});
+            var options     = {zoom:11,center:barycenter,mapTypeId:google.maps.MapTypeId.TERRAIN}
+            var map         = new google.maps.Map(document.getElementById("map-canvas"),options);
+            var polyOptions = {strokeColor:'#FF0000',strokeOpacity:0.5,strokeWeight:2,map:map};
+            {% for hub in hubs %}
+              var hub{{hub.id}} = new google.maps.LatLng({{hub.masterCity.latitude}},{{hub.masterCity.longitude}});
+              {% for hubcity in hub.cities %}
+              var marker{{hubcity.id}} = new google.maps.Marker({position:new google.maps.LatLng({{hubcity.latitude}},{{hubcity.longitude}}),map:map,title:"{{(hub.masterCity==hubcity)?hub:hubcity}}"});
+              var poly{{hubcity.id}} = new google.maps.Polyline(polyOptions).setPath([hub{{hub.id}},marker{{hubcity.id}}.getPosition()]);
+              google.maps.event.addListener(marker{{hubcity.id}}, 'click', function() {
+                new google.maps.InfoWindow({content: '<div class="infowindow"><h2>{{hubcity}}</h2></div>'}).open(map,marker{{hubcity.id}});
+              });
+              {% endfor %}
+            {% endfor %}
+            var poly0 = new google.maps.Polyline(polyOptions).setPath([hub1,hub2]);
+          }
+        </script>
+{% endblock %}
+{% block bodyonload %} onload="initialize()"{% endblock %}
+{% block breadcrumb %}
+        <ul class="xbreadcrumbs" id="breadcrumbs">
+            <li>
+               <a href="{{ path('popolitinero_admin_hubmanager_index') }}" class="home">Popolitinero</a>
+               <ul>
+                   <li><a href="#">Supervisation</a></li>
+                   <li><a href="{{ path('popolitinero_admin_hubmanager_hub', { 'hubslug': 'cc-cognac' }) }}">CC Cognac</a></li>
+                   <li><a href="{{ path('popolitinero_admin_hubmanager_hub', { 'hubslug': 'cc-pays-santon' }) }}">CC Pays santon</a></li>
+               </ul>
+            </li>
+            <li class="current"><a href="{{ path('popolitinero_admin_hubmanager_index') }}">Vue générale du réseau</a></li>
+        </ul>
+{% endblock %}
+{% block body %}
+        <div id="map-canvas"></div>
+{% endblock %}

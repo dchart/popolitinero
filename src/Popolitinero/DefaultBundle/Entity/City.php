@@ -47,16 +47,17 @@ class City
     private $postal_code;
     
     /**
-     * @var object $hub
+     * @var Hub $hub
      *
-     * @ORM\ManyToOne(targetEntity="Popolitinero\DefaultBundle\Entity\Hub", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="Popolitinero\DefaultBundle\Entity\Hub", inversedBy="cities")
+     * @ORM\JoinColumn(name="hub_id", referencedColumnName="id")
      */
     private $hub;
     
     /**
      * @var decimal $latitude
      *
-     * @ORM\Column(name="latitude", type="decimal")
+     * @ORM\Column(name="latitude", type="decimal", precision=12, scale=8)
      * @Assert\NotBlank()
      */
     private $latitude;
@@ -64,7 +65,7 @@ class City
     /**
      * @var decimal $longitude
      *
-     * @ORM\Column(name="longitude", type="decimal")
+     * @ORM\Column(name="longitude", type="decimal", precision=12, scale=8)
      * @Assert\NotBlank()
      */
     private $longitude;

@@ -112,4 +112,14 @@ class Bus
     {
         return $this->implementation_date;
     }
+
+    /**
+     * Get start_exploitation
+     *
+     * @return date 
+     */
+    public function getStartExploitation()
+    {
+        return $this->start_exploitation;
+    }
 }

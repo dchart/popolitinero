@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Popolitinero\DefaultBundle\Entity\Hub
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Popolitinero\DefaultBundle\Entity\HubRepository")
  */
 class Hub implements SluggableInterface
 {
@@ -70,8 +70,21 @@ class Hub implements SluggableInterface
      * @ORM\Column(type="string")
      */
     private $slug;
+    
+    /**
+    * @ORM\OneToMany(targetEntity="Popolitinero\DefaultBundle\Entity\City", mappedBy="hub")
+    *
+    */
+    protected $cities;
 
-
+    /**
+     * @var string __toString
+     */
+    public function __toString()
+    {
+        return $this->fullname;
+    }
+    
     /**
      * Get id
      *
@@ -197,5 +210,29 @@ class Hub implements SluggableInterface
     public function getSlugFields()
     {
         return $this->getName();
+    }
+    public function __construct()
+    {
+        $this->cities = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add cities
+     *
+     * @param Popolitinero\DefaultBundle\Entity\City $cities
+     */
+    public function addCity(\Popolitinero\DefaultBundle\Entity\City $cities)
+    {
+        $this->cities[] = $cities;
+    }
+
+    /**
+     * Get cities
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getCities()
+    {
+        return $this->cities;
     }
 }
