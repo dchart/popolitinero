@@ -335,6 +335,21 @@ class LoadHubsAndCitiesData implements FixtureInterface
         $venerand->setHub($cc_pays_santon);
         $manager->persist($venerand);
         
+        /* CC de Jarnac *******************************************************/
+        $cc_jarnac = new Hub();
+        $cc_jarnac->setName('CC Jarnac');
+        $cc_jarnac->setFullname('Communauté de communes de Jarnac');
+        $jarnac = new City();
+        $jarnac->setInseeCode('16167');
+        $jarnac->setName('Jarnac');
+        $jarnac->setPostalCode('16200');
+        $jarnac->setLatitude('45.6814');
+        $jarnac->setLongitude('-0.1758');
+        $cc_jarnac->setMasterCity($jarnac);
+        $manager->persist($cc_jarnac);
+        $jarnac->setHub($cc_jarnac);
+        $manager->persist($jarnac);
+        
         /* Save all Hubs and Cities *******************************************/
         $manager->flush();
     }
