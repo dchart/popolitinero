@@ -9,10 +9,12 @@
             var options     = {zoom:11,center:barycenter,mapTypeId:google.maps.MapTypeId.TERRAIN}
             var map         = new google.maps.Map(document.getElementById("map-canvas"),options);
             var polyOptions = {strokeColor:'#FF0000',strokeOpacity:0.5,strokeWeight:2,map:map};
+            var iconstar = new google.maps.MarkerImage('/images/stars/star.png',new google.maps.Size(22,22),new google.maps.Point(0,0),new google.maps.Point(11,11));
+            var iconflagyellow = new google.maps.MarkerImage('/images/flags/flag-yellow.png',new google.maps.Size(32, 32),new google.maps.Point(0,0),new google.maps.Point(5,30));
             {% for hub in hubs %}
               var hub{{hub.id}} = new google.maps.LatLng({{hub.masterCity.latitude}},{{hub.masterCity.longitude}});
               {% for hubcity in hub.cities %}
-              var marker{{hubcity.id}} = new google.maps.Marker({position:new google.maps.LatLng({{hubcity.latitude}},{{hubcity.longitude}}),map:map,title:"{{(hub.masterCity==hubcity)?hub:hubcity}}"});
+              var marker{{hubcity.id}} = new google.maps.Marker({position:new google.maps.LatLng({{hubcity.latitude}},{{hubcity.longitude}}),map:map,title:"{{(hub.masterCity==hubcity)?hub:hubcity}}",icon:{{(hub.masterCity==hubcity)?'iconstar':'iconflagyellow'}}});
               var poly{{hubcity.id}} = new google.maps.Polyline(polyOptions).setPath([hub{{hub.id}},marker{{hubcity.id}}.getPosition()]);
               google.maps.event.addListener(marker{{hubcity.id}}, 'click', function() {
                 new google.maps.InfoWindow({content: '<div class="infowindow"><h2>{{hubcity}}</h2></div>'}).open(map,marker{{hubcity.id}});
