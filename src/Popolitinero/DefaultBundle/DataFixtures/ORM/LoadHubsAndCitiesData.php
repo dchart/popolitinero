@@ -350,6 +350,176 @@ class LoadHubsAndCitiesData implements FixtureInterface
         $jarnac->setHub($cc_jarnac);
         $manager->persist($jarnac);
         
+        $bassac = new City();
+        $bassac->setInseeCode('16032');
+        $bassac->setName('Bassac');
+        $bassac->setPostalCode('16120');
+        $bassac->setLatitude('45.6642');
+        $bassac->setLongitude('-0.1056');
+        $bassac->setInhabitants('545');
+        $bassac->setHub($cc_jarnac);
+        $manager->persist($bassac);
+        
+        $bourg_charente = new City();
+        $bourg_charente->setInseeCode('16056');
+        $bourg_charente->setName('Bourg-Charente');
+        $bourg_charente->setPostalCode('16200');
+        $bourg_charente->setLatitude('45.6736');
+        $bourg_charente->setLongitude('-0.2197');
+        $bourg_charente->setInhabitants('739');
+        $bourg_charente->setHub($cc_jarnac);
+        $manager->persist($bourg_charente);
+        
+        $chassors = new City();
+        $chassors->setInseeCode('16088');
+        $chassors->setName('Chassors');
+        $chassors->setPostalCode('16200');
+        $chassors->setLatitude('45.7119');
+        $chassors->setLongitude('-0.2019');
+        $chassors->setInhabitants('1111');
+        $chassors->setHub($cc_jarnac);
+        $manager->persist($chassors);
+        
+        $fleurac = new City();
+        $fleurac->setInseeCode('16139');
+        $fleurac->setName('Fleurac');
+        $fleurac->setPostalCode('16200');
+        $fleurac->setLatitude('45.7217');
+        $fleurac->setLongitude('-0.0822');
+        $fleurac->setInhabitants('229');
+        $fleurac->setHub($cc_jarnac);
+        $manager->persist($fleurac);
+        
+        $foussignac = new City();
+        $foussignac->setInseeCode('16145');
+        $foussignac->setName('Foussignac');
+        $foussignac->setPostalCode('16200');
+        $foussignac->setLatitude('45.7142');
+        $foussignac->setLongitude('-0.1228');
+        $foussignac->setInhabitants('591');
+        $foussignac->setHub($cc_jarnac);
+        $manager->persist($foussignac);
+        
+        $gondeville = new City();
+        $gondeville->setInseeCode('16153');
+        $gondeville->setName('Gondeville');
+        $gondeville->setPostalCode('16200');
+        $gondeville->setLatitude('45.6719');
+        $gondeville->setLongitude('-0.1492');
+        $gondeville->setInhabitants('513');
+        $gondeville->setHub($cc_jarnac);
+        $manager->persist($gondeville);
+        
+        $houlette = new City();
+        $houlette->setInseeCode('16165');
+        $houlette->setName('Houlette');
+        $houlette->setPostalCode('16200');
+        $houlette->setLatitude('45.7611');
+        $houlette->setLongitude('-0.2111');
+        $houlette->setInhabitants('385');
+        $houlette->setHub($cc_jarnac);
+        $manager->persist($houlette);
+        
+        $julienne = new City();
+        $julienne->setInseeCode('16174');
+        $julienne->setName('Julienne');
+        $julienne->setPostalCode('16200');
+        $julienne->setLatitude('45.6969');
+        $julienne->setLongitude('-0.2294');
+        $julienne->setInhabitants('432');
+        $julienne->setHub($cc_jarnac);
+        $manager->persist($julienne);
+        
+        $mainxe = new City();
+        $mainxe->setInseeCode('16202');
+        $mainxe->setName('Mainxe');
+        $mainxe->setPostalCode('16200');
+        $mainxe->setLatitude('45.6428');
+        $mainxe->setLongitude('-0.1881');
+        $mainxe->setInhabitants('613');
+        $mainxe->setHub($cc_jarnac);
+        $manager->persist($mainxe);
+        
+        $mergignac = new City();
+        $mergignac->setInseeCode('16216');
+        $mergignac->setName('Mérignac');
+        $mergignac->setPostalCode('16200');
+        $mergignac->setLatitude('45.6997');
+        $mergignac->setLongitude('-0.0792');
+        $mergignac->setInhabitants('702');
+        $mergignac->setHub($cc_jarnac);
+        $manager->persist($mergignac);
+        
+        $les_metairies = new City();
+        $les_metairies->setInseeCode('16220');
+        $les_metairies->setName('Les Métairies');
+        $les_metairies->setPostalCode('16200');
+        $les_metairies->setLatitude('45.7053');
+        $les_metairies->setLongitude('-0.1644');
+        $les_metairies->setInhabitants('532');
+        $les_metairies->setHub($cc_jarnac);
+        $manager->persist($les_metairies);
+        
+        $nercillac = new City();
+        $nercillac->setInseeCode('16243');
+        $nercillac->setName('Nercillac');
+        $nercillac->setPostalCode('16200');
+        $nercillac->setLatitude('45.7161');
+        $nercillac->setLongitude('-0.245');
+        $nercillac->setInhabitants('1019');
+        $nercillac->setHub($cc_jarnac);
+        $manager->persist($nercillac);
+        
+        $reparsac = new City();
+        $reparsac->setInseeCode('16277');
+        $reparsac->setName('Réparsac');
+        $reparsac->setPostalCode('16200');
+        $reparsac->setLatitude('45.7311');
+        $reparsac->setLongitude('-0.235');
+        $reparsac->setInhabitants('570');
+        $reparsac->setHub($cc_jarnac);
+        $manager->persist($reparsac);
+        
+        $saint_meme_les_carrieres = new City();
+        $saint_meme_les_carrieres->setInseeCode('16340');
+        $saint_meme_les_carrieres->setName('Saint-Même-les-Carrières');
+        $saint_meme_les_carrieres->setPostalCode('16720');
+        $saint_meme_les_carrieres->setLatitude('45.6464');
+        $saint_meme_les_carrieres->setLongitude('-0.1411');
+        $saint_meme_les_carrieres->setInhabitants('1092');
+        $saint_meme_les_carrieres->setHub($cc_jarnac);
+        $manager->persist($saint_meme_les_carrieres);
+        
+        $sigogne = new City();
+        $sigogne->setInseeCode('16369');
+        $sigogne->setName('Sigogne');
+        $sigogne->setPostalCode('16200');
+        $sigogne->setLatitude('45.7378');
+        $sigogne->setLongitude('-0.1569');
+        $sigogne->setInhabitants('1009');
+        $sigogne->setHub($cc_jarnac);
+        $manager->persist($sigogne);
+        
+        $sainte_severe = new City();
+        $sainte_severe->setInseeCode('16349');
+        $sainte_severe->setName('Sainte-Sévère');
+        $sainte_severe->setPostalCode('16200');
+        $sainte_severe->setLatitude('45.7536');
+        $sainte_severe->setLongitude('-0.2372');
+        $sainte_severe->setInhabitants('541');
+        $sainte_severe->setHub($cc_jarnac);
+        $manager->persist($sainte_severe);
+        
+        $triac_lautrait = new City();
+        $triac_lautrait->setInseeCode('16387');
+        $triac_lautrait->setName('Triac-Lautrait');
+        $triac_lautrait->setPostalCode('16200');
+        $triac_lautrait->setLatitude('45.6906');
+        $triac_lautrait->setLongitude('-0.1253');
+        $triac_lautrait->setInhabitants('444');
+        $triac_lautrait->setHub($cc_jarnac);
+        $manager->persist($triac_lautrait);
+        
         /* Save all Hubs and Cities *******************************************/
         $manager->flush();
     }
