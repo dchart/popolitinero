@@ -17,7 +17,12 @@ class HubManagerController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         $hubs = $em->getRepository('PopolitineroDefaultBundle:Hub')->findAll();
         $barycenter = $em->getRepository('PopolitineroDefaultBundle:Hub')->getBarycenter();
-        return array('hubs' => $hubs, 'barycenter' => $barycenter);
+        $train_steps = $em->getRepository('PopolitineroDefaultBundle:TrainStep')->findAll();
+        return array(
+          'hubs' => $hubs,
+          'barycenter' => $barycenter,
+          'train_steps' => $train_steps,
+        );
     }
     
     /**
@@ -32,6 +37,10 @@ class HubManagerController extends Controller
         if(!$hub):
           throw $this->createNotFoundException('The hub sluggified by '.$hubslug.' does not exist.');
         endif;
-        return array('hubslug' => $hubslug, 'hub' => $hub, 'barycenter' => $barycenter);
+        return array(
+          'hubslug' => $hubslug,
+          'hub' => $hub,
+          'barycenter' => $barycenter,
+        );
     }
 }

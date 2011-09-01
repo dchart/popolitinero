@@ -10,9 +10,23 @@
             var map         = new google.maps.Map(document.getElementById("map-canvas"),options);
             var polyOptionsActive = {strokeColor:'#FF0000',strokeOpacity:0.5,strokeWeight:2,map:map};
             var polyOptionsInactive = {strokeColor:'#000',strokeOpacity:0.5,strokeWeight:2,map:map};
+            var polyOptionsTrain = {strokeColor:'#004494',strokeOpacity:0.4,strokeWeight:1,map:map};
             var iconstar = new google.maps.MarkerImage('/images/stars/star.png',new google.maps.Size(22,22),new google.maps.Point(0,0),new google.maps.Point(11,11));
             var iconflagyellow = new google.maps.MarkerImage('/images/flags/flag-yellow.png',new google.maps.Size(32, 32),new google.maps.Point(0,0),new google.maps.Point(5,30));
             var iconflagblack = new google.maps.MarkerImage('/images/flags/flag-black.png',new google.maps.Size(32, 32),new google.maps.Point(0,0),new google.maps.Point(5,30));
+            var iconflagblue = new google.maps.MarkerImage('/images/flags/flag-blue.png',new google.maps.Size(32, 32),new google.maps.Point(0,0),new google.maps.Point(5,30));
+            /* Train network */
+            var lat,lng,station
+            {% for train_step in train_steps %}
+              lat = {{train_step.trainStation.busStop.latitude}};
+              lng = {{train_step.trainStation.busStop.longitude}};
+              if( station != null ){
+                var trainline{{train_step.id}} = new google.maps.Polyline(polyOptionsTrain).setPath([station,new google.maps.LatLng(lat,lng)]);
+              }
+              station = new google.maps.LatLng(lat,lng);
+              var markerTrainStep{{train_step.id}} = new google.maps.Marker({position:station,map:map,title:"{{train_step.trainStation.busStop.name}}",icon:iconflagblue});
+            {% endfor %}
+            /* Bus network */
             {% for hub in hubs %}
               var hub{{hub.id}} = new google.maps.LatLng({{hub.masterCity.latitude}},{{hub.masterCity.longitude}});
               {% for hubcity in hub.cities %}
@@ -28,7 +42,6 @@
               });
               {% endfor %}
             {% endfor %}
-            //var poly0 = new google.maps.Polyline(polyOptions).setPath([hub1,hub2]);
           }
         </script>
 {% endblock %}
@@ -40,12 +53,18 @@
                <ul>
                    <li><a href="#">Supervisation</a></li>
                    <li><a href="{{ path('popolitinero_admin_hubmanager_hub', { 'hubslug': 'cc-cognac' }) }}">CC Cognac</a></li>
+                   <li><a href="{{ path('popolitinero_admin_hubmanager_hub', { 'hubslug': 'cc-grande-champagne' }) }}">CC Grande Champagne</a></li>
                    <li><a href="{{ path('popolitinero_admin_hubmanager_hub', { 'hubslug': 'cc-jarnac' }) }}">CC Jarnac</a></li>
                    <li><a href="{{ path('popolitinero_admin_hubmanager_hub', { 'hubslug': 'cc-pays-santon' }) }}">CC Pays santon</a></li>
                    <li><a href="{{ path('popolitinero_admin_hubmanager_hub', { 'hubslug': 'cc-region-chateauneuf' }) }}">CC Région Châteauneuf</a></li>
                </ul>
             </li>
-            <li class="current"><a href="{{ path('popolitinero_admin_hubmanager_index') }}">Vue générale du réseau</a></li>
+            <li class="current"><a href="{{ path('popolitinero_admin_hubmanager_index') }}">Vue générale du réseau</a>
+              <ul>
+                <li><a href="#">Réseau Bus</a></li>
+                <li><a href="#">Réseau SNCF</a></li>
+              </ul>
+            </li>
         </ul>
 {% endblock %}
 {% block body %}

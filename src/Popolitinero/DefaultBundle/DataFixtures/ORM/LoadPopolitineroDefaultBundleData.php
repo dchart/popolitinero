@@ -5,8 +5,12 @@ namespace Popolitinero\DefaultBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Popolitinero\DefaultBundle\Entity\Hub;
 use Popolitinero\DefaultBundle\Entity\City;
+use Popolitinero\DefaultBundle\Entity\BusStop;
+use Popolitinero\DefaultBundle\Entity\TrainStation;
+use Popolitinero\DefaultBundle\Entity\TrainTravel;
+use Popolitinero\DefaultBundle\Entity\TrainStep;
 
-class LoadHubsAndCitiesData implements FixtureInterface
+class LoadPopolitineroDefaultBundleData implements FixtureInterface
 {
     public function load($manager)
     {
@@ -640,8 +644,8 @@ class LoadHubsAndCitiesData implements FixtureInterface
         $saint_simon->setInseeCode('16352');
         $saint_simon->setName('Saint-Simon');
         $saint_simon->setPostalCode('16120');
-        $saint_simon->setLatitude('45.6506');
-        $saint_simon->setLongitude('0.0747');
+        $saint_simon->setLatitude('45.64928901085989');
+        $saint_simon->setLongitude('-0.07555246353149414');
         $saint_simon->setInhabitants('209');
         $saint_simon->setHub($cc_chateauneuf);
         $manager->persist($saint_simon);
@@ -656,7 +660,285 @@ class LoadHubsAndCitiesData implements FixtureInterface
         $vibrac->setHub($cc_chateauneuf);
         $manager->persist($vibrac);
         
-        /* Save all Hubs and Cities *******************************************/
+        /* CC de Grande Champagne ******* *************************************/
+        $cc_grande_champagne = new Hub();
+        $cc_grande_champagne->setName('CC Grande Champagne');
+        $cc_grande_champagne->setFullname('Communauté de communes de Grande Champagne');
+        $segonzac = new City();
+        $segonzac->setInseeCode('16366');
+        $segonzac->setName('Segonzac');
+        $segonzac->setPostalCode('16130');
+        $segonzac->setLatitude('45.6181');
+        $segonzac->setLongitude('-0.2175');
+        $segonzac->setInhabitants('2166');
+        $cc_grande_champagne->setMasterCity($segonzac);
+        $manager->persist($cc_grande_champagne);
+        $segonzac->setHub($cc_grande_champagne);
+        $manager->persist($segonzac);
+        
+        $ambleville = new City();
+        $ambleville->setInseeCode('16010');
+        $ambleville->setName('Ambleville');
+        $ambleville->setPostalCode('16300');
+        $ambleville->setLatitude('45.5586');
+        $ambleville->setLongitude('-0.2211');
+        $ambleville->setInhabitants('197');
+        $ambleville->setHub($cc_grande_champagne);
+        $manager->persist($ambleville);
+        
+        $angeac_champagne = new City();
+        $angeac_champagne->setInseeCode('16012');
+        $angeac_champagne->setName('Angeac-Champagne');
+        $angeac_champagne->setPostalCode('16130');
+        $angeac_champagne->setLatitude('45.6083');
+        $angeac_champagne->setLongitude('-0.2964');
+        $angeac_champagne->setInhabitants('510');
+        $angeac_champagne->setHub($cc_grande_champagne);
+        $manager->persist($angeac_champagne);
+        
+        $criteuil_la_magdeleine = new City();
+        $criteuil_la_magdeleine->setInseeCode('16116');
+        $criteuil_la_magdeleine->setName('Criteuil-la-Magdeleine');
+        $criteuil_la_magdeleine->setPostalCode('16300');
+        $criteuil_la_magdeleine->setLatitude('45.5375');
+        $criteuil_la_magdeleine->setLongitude('-0.215');
+        $criteuil_la_magdeleine->setInhabitants('435');
+        $criteuil_la_magdeleine->setHub($cc_grande_champagne);
+        $manager->persist($criteuil_la_magdeleine);
+        
+        $gensac_la_pallue = new City();
+        $gensac_la_pallue->setInseeCode('16150');
+        $gensac_la_pallue->setName('Gensac-la-Pallue');
+        $gensac_la_pallue->setPostalCode('16130');
+        $gensac_la_pallue->setLatitude('45.6517');
+        $gensac_la_pallue->setLongitude('-0.2514');
+        $gensac_la_pallue->setInhabitants('1604');
+        $gensac_la_pallue->setHub($cc_grande_champagne);
+        $manager->persist($gensac_la_pallue);
+        
+        $gente = new City();
+        $gente->setInseeCode('16151');
+        $gente->setName('Genté');
+        $gente->setPostalCode('16130');
+        $gente->setLatitude('45.6286');
+        $gente->setLongitude('-0.3125');
+        $gente->setInhabitants('877');
+        $gente->setHub($cc_grande_champagne);
+        $manager->persist($gente);
+        
+        $juillac_le_coq = new City();
+        $juillac_le_coq->setInseeCode('16171');
+        $juillac_le_coq->setName('Jullac-le-Coq');
+        $juillac_le_coq->setPostalCode('16130');
+        $juillac_le_coq->setLatitude('45.59');
+        $juillac_le_coq->setLongitude('-0.2597');
+        $juillac_le_coq->setInhabitants('669');
+        $juillac_le_coq->setHub($cc_grande_champagne);
+        $manager->persist($juillac_le_coq);
+        
+        $lignieres_sonneville = new City();
+        $lignieres_sonneville->setInseeCode('16186');
+        $lignieres_sonneville->setName('Lignières-Sonneville');
+        $lignieres_sonneville->setPostalCode('16130');
+        $lignieres_sonneville->setLatitude('45.5597');
+        $lignieres_sonneville->setLongitude('-0.1817');
+        $lignieres_sonneville->setInhabitants('593');
+        $lignieres_sonneville->setHub($cc_grande_champagne);
+        $manager->persist($lignieres_sonneville);
+        
+        $saint_fort_sur_le_ne = new City();
+        $saint_fort_sur_le_ne->setInseeCode('16316');
+        $saint_fort_sur_le_ne->setName('Saint-Fort-sur-le-Né');
+        $saint_fort_sur_le_ne->setPostalCode('16130');
+        $saint_fort_sur_le_ne->setLatitude('45.5781');
+        $saint_fort_sur_le_ne->setLongitude('-0.3039');
+        $saint_fort_sur_le_ne->setInhabitants('399');
+        $saint_fort_sur_le_ne->setHub($cc_grande_champagne);
+        $manager->persist($saint_fort_sur_le_ne);
+        
+        $saint_preuil = new City();
+        $saint_preuil->setInseeCode('16343');
+        $saint_preuil->setName('Saint-Preuil');
+        $saint_preuil->setPostalCode('16130');
+        $saint_preuil->setLatitude('45.5969');
+        $saint_preuil->setLongitude('-0.1708');
+        $saint_preuil->setInhabitants('300');
+        $saint_preuil->setHub($cc_grande_champagne);
+        $manager->persist($saint_preuil);
+        
+        $salles_d_angles = new City();
+        $salles_d_angles->setInseeCode('16359');
+        $salles_d_angles->setName('Salles-d\'Angles');
+        $salles_d_angles->setPostalCode('16130');
+        $salles_d_angles->setLatitude('45.6192');
+        $salles_d_angles->setLongitude('-0.3319');
+        $salles_d_angles->setInhabitants('1092');
+        $salles_d_angles->setHub($cc_grande_champagne);
+        $manager->persist($salles_d_angles);
+        
+        $verrieres = new City();
+        $verrieres->setInseeCode('16399');
+        $verrieres->setName('Verrières');
+        $verrieres->setPostalCode('16130');
+        $verrieres->setLatitude('45.5719');
+        $verrieres->setLongitude('-0.2653');
+        $verrieres->setInhabitants('370');
+        $verrieres->setHub($cc_grande_champagne);
+        $manager->persist($verrieres);
+        
+/* BusStops *******************************************************************/
+        /* Saintes ************************************************************/
+        $gare_sncf_saintes = new BusStop();
+        $gare_sncf_saintes->setCity($saintes);
+        $gare_sncf_saintes->setName('Gare SNCF de Saintes');
+        $gare_sncf_saintes->setIsFamous(true);
+        $gare_sncf_saintes->setIsTrainConnected(true);
+        $gare_sncf_saintes->setLatitude('45.748723405906226');
+        $gare_sncf_saintes->setLongitude('-0.6182518601417542');
+        $manager->persist($gare_sncf_saintes);
+        
+        /* Saint-Sever-de-Saintonge *******************************************/
+        $gare_sncf_beillant = new BusStop();
+        $gare_sncf_beillant->setCity($saint_sever_de_saintonge);
+        $gare_sncf_beillant->setName('Gare SNCF de Beillant');
+        $gare_sncf_beillant->setIsFamous(true);
+        $gare_sncf_beillant->setIsTrainConnected(true);
+        $gare_sncf_beillant->setLatitude('45.70036678883351');
+        $gare_sncf_beillant->setLongitude('-0.5264666676521301');
+        $manager->persist($gare_sncf_beillant);
+        
+        /* Cognac *************************************************************/
+        $gare_sncf_cognac = new BusStop();
+        $gare_sncf_cognac->setCity($cognac);
+        $gare_sncf_cognac->setName('Gare SNCF de Cognac');
+        $gare_sncf_cognac->setIsFamous(true);
+        $gare_sncf_cognac->setIsTrainConnected(true);
+        $gare_sncf_cognac->setLatitude('45.68477889792381');
+        $gare_sncf_cognac->setLongitude('-0.3258964419364929');
+        $manager->persist($gare_sncf_cognac);
+        
+        /* Jarnac *************************************************************/
+        $gare_sncf_jarnac = new BusStop();
+        $gare_sncf_jarnac->setCity($jarnac);
+        $gare_sncf_jarnac->setName('Gare SNCF de Jarnac');
+        $gare_sncf_jarnac->setIsFamous(true);
+        $gare_sncf_jarnac->setIsTrainConnected(true);
+        $gare_sncf_jarnac->setLatitude('45.67148079266166');
+        $gare_sncf_jarnac->setLongitude('-0.17760783433914185');
+        $manager->persist($gare_sncf_jarnac);
+        
+        /* Cognac *************************************************************/
+        $gare_sncf_chateauneuf = new BusStop();
+        $gare_sncf_chateauneuf->setCity($chateauneuf_sur_charente);
+        $gare_sncf_chateauneuf->setName('Gare SNCF de Châteauneuf');
+        $gare_sncf_chateauneuf->setIsFamous(true);
+        $gare_sncf_chateauneuf->setIsTrainConnected(true);
+        $gare_sncf_chateauneuf->setLatitude('45.59973914505817');
+        $gare_sncf_chateauneuf->setLongitude('-0.05057036876678467');
+        $manager->persist($gare_sncf_chateauneuf);
+        
+/* TrainStations **************************************************************/
+        $gare_saintes = new TrainStation();
+        $gare_saintes->setBusStop($gare_sncf_saintes);
+        $gare_saintes->setIsWheelchairAccessible(true);
+        $manager->persist($gare_saintes);
+        
+        $gare_beillant = new TrainStation();
+        $gare_beillant->setBusStop($gare_sncf_beillant);
+        $manager->persist($gare_beillant);
+        
+        $gare_cognac = new TrainStation();
+        $gare_cognac->setBusStop($gare_sncf_cognac);
+        $gare_cognac->setIsWheelchairAccessible(true);
+        $manager->persist($gare_cognac);
+        
+        $gare_jarnac = new TrainStation();
+        $gare_jarnac->setBusStop($gare_sncf_jarnac);
+        $manager->persist($gare_jarnac);
+        
+        $gare_chateauneuf = new TrainStation();
+        $gare_chateauneuf->setBusStop($gare_sncf_chateauneuf);
+        $manager->persist($gare_chateauneuf);
+        
+/* TrainTravels ***************************************************************/
+
+        /* Saintes > Châteauneuf **********************************************/
+        $train_travel_saintes_chateauneuf = new TrainTravel();
+        $train_travel_saintes_chateauneuf->setImplementationDate(date_create('2011-05-07 00:00:00'));
+        $train_travel_saintes_chateauneuf->setExpirationDate(date_create('2011-12-10 23:59:59'));
+        $manager->persist($train_travel_saintes_chateauneuf);
+        
+        /* Châteauneuf > Saintes **********************************************/
+        $train_travel_chateauneuf_saintes = new TrainTravel();
+        $train_travel_chateauneuf_saintes->setImplementationDate(date_create('2011-05-07 00:00:00'));
+        $train_travel_chateauneuf_saintes->setExpirationDate(date_create('2011-12-10 23:59:59'));
+        $manager->persist($train_travel_chateauneuf_saintes);
+        
+/* TrainSteps *****************************************************************/
+
+        /* Saintes > Châteauneuf **********************************************/
+        $train_step_saintes_chateauneuf1 = new TrainStep();
+        $train_step_saintes_chateauneuf1->setTrainTravel($train_travel_saintes_chateauneuf);
+        $train_step_saintes_chateauneuf1->setTrainStation($gare_saintes);
+        $train_step_saintes_chateauneuf1->setPosition(1);
+        $manager->persist($train_step_saintes_chateauneuf1);
+        
+        $train_step_saintes_chateauneuf2 = new TrainStep();
+        $train_step_saintes_chateauneuf2->setTrainTravel($train_travel_saintes_chateauneuf);
+        $train_step_saintes_chateauneuf2->setTrainStation($gare_beillant);
+        $train_step_saintes_chateauneuf2->setPosition(2);
+        $manager->persist($train_step_saintes_chateauneuf2);
+        
+        $train_step_saintes_chateauneuf3 = new TrainStep();
+        $train_step_saintes_chateauneuf3->setTrainTravel($train_travel_saintes_chateauneuf);
+        $train_step_saintes_chateauneuf3->setTrainStation($gare_cognac);
+        $train_step_saintes_chateauneuf3->setPosition(3);
+        $manager->persist($train_step_saintes_chateauneuf3);
+        
+        $train_step_saintes_chateauneuf4 = new TrainStep();
+        $train_step_saintes_chateauneuf4->setTrainTravel($train_travel_saintes_chateauneuf);
+        $train_step_saintes_chateauneuf4->setTrainStation($gare_jarnac);
+        $train_step_saintes_chateauneuf4->setPosition(4);
+        $manager->persist($train_step_saintes_chateauneuf4);
+        
+        $train_step_saintes_chateauneuf5 = new TrainStep();
+        $train_step_saintes_chateauneuf5->setTrainTravel($train_travel_saintes_chateauneuf);
+        $train_step_saintes_chateauneuf5->setTrainStation($gare_chateauneuf);
+        $train_step_saintes_chateauneuf5->setPosition(5);
+        $manager->persist($train_step_saintes_chateauneuf5);
+        
+        /* Châteauneuf > Saintes **********************************************/
+        $train_step_chateauneuf_saintes1 = new TrainStep();
+        $train_step_chateauneuf_saintes1->setTrainTravel($train_travel_chateauneuf_saintes);
+        $train_step_chateauneuf_saintes1->setTrainStation($gare_chateauneuf);
+        $train_step_chateauneuf_saintes1->setPosition(1);
+        $manager->persist($train_step_chateauneuf_saintes1);
+        
+        $train_step_chateauneuf_saintes2 = new TrainStep();
+        $train_step_chateauneuf_saintes2->setTrainTravel($train_travel_chateauneuf_saintes);
+        $train_step_chateauneuf_saintes2->setTrainStation($gare_jarnac);
+        $train_step_chateauneuf_saintes2->setPosition(2);
+        $manager->persist($train_step_chateauneuf_saintes2);
+        
+        $train_step_chateauneuf_saintes3 = new TrainStep();
+        $train_step_chateauneuf_saintes3->setTrainTravel($train_travel_chateauneuf_saintes);
+        $train_step_chateauneuf_saintes3->setTrainStation($gare_cognac);
+        $train_step_chateauneuf_saintes3->setPosition(3);
+        $manager->persist($train_step_chateauneuf_saintes3);
+        
+        $train_step_chateauneuf_saintes4 = new TrainStep();
+        $train_step_chateauneuf_saintes4->setTrainTravel($train_travel_chateauneuf_saintes);
+        $train_step_chateauneuf_saintes4->setTrainStation($gare_beillant);
+        $train_step_chateauneuf_saintes4->setPosition(4);
+        $manager->persist($train_step_chateauneuf_saintes4);
+        
+        $train_step_chateauneuf_saintes5 = new TrainStep();
+        $train_step_chateauneuf_saintes5->setTrainTravel($train_travel_chateauneuf_saintes);
+        $train_step_chateauneuf_saintes5->setTrainStation($gare_saintes);
+        $train_step_chateauneuf_saintes5->setPosition(5);
+        $manager->persist($train_step_chateauneuf_saintes5);
+           
+/* Save all *******************************************************************/
         $manager->flush();
     }
  
@@ -672,7 +954,7 @@ class LoadHubsAndCitiesData implements FixtureInterface
         $xxx->setPostalCode('');
         $xxx->setLatitude('');
         $xxx->setLongitude('');
-        $xxx->setInhabitant('');
+        $xxx->setInhabitants('');
         $xxx->setHub($yyy);
         $manager->persist($xxx);
         */

@@ -114,7 +114,7 @@ class BusTourException
     /**
      * Add BusStep
      */
-    public function addBusSetp(\Popolitinero\DefaultBundle\Entity\BusStep $bus_step)
+    public function addBusStep(\Popolitinero\DefaultBundle\Entity\BusStep $bus_step)
     {
         $this->bus_steps[] = $bus_step;
     }
@@ -197,15 +197,5 @@ class BusTourException
     public function getNoTraffic()
     {
         return $this->no_traffic;
-    }
-
-    /**
-     * Add bus_steps
-     *
-     * @param Popolitinero\DefaultBundle\Entity\BusStep $busSteps
-     */
-    public function addBusStep(\Popolitinero\DefaultBundle\Entity\BusStep $busSteps)
-    {
-        $this->bus_steps[] = $busSteps;
     }
 }

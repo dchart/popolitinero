@@ -40,41 +40,41 @@ class BusStop
      *
      * @ORM\Column(name="is_famous", type="boolean")
      */
-    private $is_famous;
+    private $is_famous = false;
 
     /**
      * @var boolean $is_terminus
      *
      * @ORM\Column(name="is_terminus", type="boolean")
      */
-    private $is_terminus;
+    private $is_terminus = false;
 
     /**
      * @var boolean $is_on_demand
      *
      * @ORM\Column(name="is_on_demand", type="boolean")
      */
-    private $is_on_demand;
+    private $is_on_demand = false;
 
     /**
      * @var boolean $is_train_connected
      *
      * @ORM\Column(name="is_train_connected", type="boolean")
      */
-    private $is_train_connected;
+    private $is_train_connected = false;
 
 
     /**
      * @var decimal $latitude
      *
-     * @ORM\Column(name="latitude", type="decimal")
+     * @ORM\Column(name="latitude", type="decimal", precision=12, scale=8)
      */
     private $latitude;
 
     /**
      * @var decimal $longitude
      *
-     * @ORM\Column(name="longitude", type="decimal")
+     * @ORM\Column(name="longitude", type="decimal", precision=12, scale=8)
      */
     private $longitude;
 

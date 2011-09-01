@@ -6,12 +6,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Popolitinero\DefaultBundle\Entity\TrainTravel
+ * Popolitinero\DefaultBundle\Entity\TrainStation
  *
  * @ORM\Table()
  * @ORM\Entity
  */
-class TrainTravel
+class TrainStation
 {
     /**
      * @var integer $id
@@ -23,18 +23,18 @@ class TrainTravel
     private $id;
 
     /**
-     * @var date $implementation_date
+     * @var BusStop $bus_stop
      *
-     * @ORM\Column(name="implementation_date", type="date")
+     * @ORM\OneToOne(targetEntity="Popolitinero\DefaultBundle\Entity\BusStop")
      */
-    private $implementation_date;
+    private $bus_stop;
 
     /**
-     * @var date $expiration_date
+     * @var boolean $is_wheelchair_accessible
      *
-     * @ORM\Column(name="expiration_date", type="date")
+     * @ORM\Column(type="boolean")
      */
-    private $expiration_date;
+    private $is_wheelchair_accessible = false;
     
     /**
      * @ORM\OneToMany(targetEntity="Popolitinero\DefaultBundle\Entity\TrainStep", mappedBy="trainTravel")
@@ -48,7 +48,7 @@ class TrainTravel
     {
         $this->steps = new ArrayCollection();
     }
-    
+
     /**
      * Get id
      *
@@ -60,43 +60,43 @@ class TrainTravel
     }
 
     /**
-     * Set implementation_date
+     * Set bus_stop
      *
-     * @param date $implementationDate
+     * @param BusStop $bus_stop_departure
      */
-    public function setImplementationDate($implementationDate)
+    public function setBusStop(\Popolitinero\DefaultBundle\Entity\BusStop $bus_stop)
     {
-        $this->implementation_date = $implementationDate;
+        $this->bus_stop = $bus_stop;
     }
 
     /**
-     * Get implementation_date
+     * Get bus_stop
      *
-     * @return date 
+     * @return BusStop $bus_stop
      */
-    public function getImplementationDate()
+    public function getBusStop()
     {
-        return $this->implementation_date;
+        return $this->bus_stop;
+    }
+    
+    /**
+     * Set is_wheelchair_accessible
+     *
+     * @param boolean $is_wheelchair_accessible
+     */
+    public function setIsWheelchairAccessible($is_wheelchair_accessible)
+    {
+        $this->is_wheelchair_accessible = $is_wheelchair_accessible;
     }
 
     /**
-     * Set expiration_date
+     * Get is_wheelchair_accessible
      *
-     * @param date $expirationDate
+     * @return boolean
      */
-    public function setExpirationDate($expirationDate)
+    public function getIsWheelchairAccessible()
     {
-        $this->expiration_date = $expirationDate;
-    }
-
-    /**
-     * Get expiration_date
-     *
-     * @return date 
-     */
-    public function getExpirationDate()
-    {
-        return $this->expiration_date;
+        return $this->is_wheelchair_accessible;
     }
 
     /**
