@@ -8,7 +8,7 @@
             var barycenter  = new google.maps.LatLng({{barycenter.latitude}},{{barycenter.longitude}});
             var options     = {zoom:11,center:barycenter,mapTypeId:google.maps.MapTypeId.TERRAIN}
             var map         = new google.maps.Map(document.getElementById("map-canvas"),options);
-            var polyOptionsActive = {strokeColor:'#FF0000',strokeOpacity:0.5,strokeWeight:2,map:map};
+            var polyOptionsActive = {strokeColor:'#FF0000',strokeOpacity:0.5,strokeWeight:3,map:map};
             var polyOptionsInactive = {strokeColor:'#000',strokeOpacity:0.5,strokeWeight:2,map:map};
             var polyOptionsTrain = {strokeColor:'#004494',strokeOpacity:0.4,strokeWeight:1,map:map};
             var iconstar = new google.maps.MarkerImage('/images/stars/star.png',new google.maps.Size(22,22),new google.maps.Point(0,0),new google.maps.Point(11,11));
@@ -55,7 +55,8 @@
                    <li><a href="{{ path('popolitinero_admin_hubmanager_hub', { 'hubslug': 'cc-cognac' }) }}">CC Cognac</a></li>
                    <li><a href="{{ path('popolitinero_admin_hubmanager_hub', { 'hubslug': 'cc-grande-champagne' }) }}">CC Grande Champagne</a></li>
                    <li><a href="{{ path('popolitinero_admin_hubmanager_hub', { 'hubslug': 'cc-jarnac' }) }}">CC Jarnac</a></li>
-                   <li><a href="{{ path('popolitinero_admin_hubmanager_hub', { 'hubslug': 'cc-pays-santon' }) }}">CC Pays santon</a></li>
+                   <li><a href="{{ path('popolitinero_admin_hubmanager_hub', { 'hubslug': 'cc-pays-buriaud' }) }}">CC Pays Buriaud</a></li>
+                   <li><a href="{{ path('popolitinero_admin_hubmanager_hub', { 'hubslug': 'cc-pays-santon' }) }}">CC Pays Santon</a></li>
                    <li><a href="{{ path('popolitinero_admin_hubmanager_hub', { 'hubslug': 'cc-region-chateauneuf' }) }}">CC Région Châteauneuf</a></li>
                </ul>
             </li>

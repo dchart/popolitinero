@@ -163,7 +163,7 @@ class LoadPopolitineroDefaultBundleData implements FixtureInterface
         
         /* CC du Pays santon **************************************************/
         $cc_pays_santon = new Hub();
-        $cc_pays_santon->setName('CC Pays santon');
+        $cc_pays_santon->setName('CC Pays Santon');
         $cc_pays_santon->setFullname('Communauté de communes du Pays santon');
         $saintes = new City();
         $saintes->setInseeCode('17415');
@@ -785,6 +785,112 @@ class LoadPopolitineroDefaultBundleData implements FixtureInterface
         $verrieres->setInhabitants('370');
         $verrieres->setHub($cc_grande_champagne);
         $manager->persist($verrieres);
+        
+        /* CC Vignobles et Vals boisés du Pays Buriaud ************************/
+        $cc_pays_buriaud = new Hub();
+        $cc_pays_buriaud->setName('CC Pays Buriaud');
+        $cc_pays_buriaud->setFullname('Communauté de communes Vignobles et Vals boisés du Pays Buriaud');
+        $burie = new City();
+        $burie->setInseeCode('17072');
+        $burie->setName('Burie');
+        $burie->setPostalCode('17770');
+        $burie->setLatitude('45.773333');
+        $burie->setLongitude('-0.421111');
+        $burie->setInhabitants('1259');
+        $cc_pays_buriaud->setMasterCity($burie);
+        $manager->persist($cc_pays_buriaud);
+        $burie->setHub($cc_pays_buriaud);
+        $manager->persist($burie);
+        
+        $chaniers = new City();
+        $chaniers->setInseeCode('17086');
+        $chaniers->setName('Chaniers');
+        $chaniers->setPostalCode('17610');
+        $chaniers->setLatitude('45.718889');
+        $chaniers->setLongitude('-0.555833');
+        $chaniers->setInhabitants('3355');
+        $chaniers->setHub($cc_pays_buriaud);
+        $manager->persist($chaniers);
+        
+        $cherac = new City();
+        $cherac->setInseeCode('17100');
+        $cherac->setName('Chérac');
+        $cherac->setPostalCode('17610');
+        $cherac->setLatitude('45.70416');
+        $cherac->setLongitude('-0.436388');
+        $cherac->setInhabitants('1033');
+        $cherac->setHub($cc_pays_buriaud);
+        $manager->persist($cherac);
+        
+        $dompierre_sur_charente = new City();
+        $dompierre_sur_charente->setInseeCode('17141');
+        $dompierre_sur_charente->setName('Dompierre-sur-Charente');
+        $dompierre_sur_charente->setPostalCode('17610');
+        $dompierre_sur_charente->setLatitude('45.7025');
+        $dompierre_sur_charente->setLongitude('-0.491389');
+        $dompierre_sur_charente->setInhabitants('449');
+        $dompierre_sur_charente->setHub($cc_pays_buriaud);
+        $manager->persist($dompierre_sur_charente);
+        
+        $migron = new City();
+        $migron->setInseeCode('17235');
+        $migron->setName('Migron');
+        $migron->setPostalCode('17770');
+        $migron->setLatitude('45.803611');
+        $migron->setLongitude('-0.396111');
+        $migron->setInhabitants('627');
+        $migron->setHub($cc_pays_buriaud);
+        $manager->persist($migron);
+        
+        $saint_bris_des_bois = new City();
+        $saint_bris_des_bois->setInseeCode('17313');
+        $saint_bris_des_bois->setName('Saint-Bris-des-Bois');
+        $saint_bris_des_bois->setPostalCode('17770');
+        $saint_bris_des_bois->setLatitude('45.767222');
+        $saint_bris_des_bois->setLongitude('-0.488333');
+        $saint_bris_des_bois->setInhabitants('414');
+        $saint_bris_des_bois->setHub($cc_pays_buriaud);
+        $manager->persist($saint_bris_des_bois);
+        
+        $saint_cesaire = new City();
+        $saint_cesaire->setInseeCode('17314');
+        $saint_cesaire->setName('Saint-Césaire');
+        $saint_cesaire->setPostalCode('17770');
+        $saint_cesaire->setLatitude('45.7531');
+        $saint_cesaire->setLongitude('-0.5061');
+        $saint_cesaire->setInhabitants('918');
+        $saint_cesaire->setHub($cc_pays_buriaud);
+        $manager->persist($saint_cesaire);
+        
+        $saint_sauvant = new City();
+        $saint_sauvant->setInseeCode('17395');
+        $saint_sauvant->setName('Saint-Sauvant');
+        $saint_sauvant->setPostalCode('17610');
+        $saint_sauvant->setLatitude('45.74');
+        $saint_sauvant->setLongitude('-0.50277');
+        $saint_sauvant->setInhabitants('517');
+        $saint_sauvant->setHub($cc_pays_buriaud);
+        $manager->persist($saint_sauvant);
+        
+        $le_seure = new City();
+        $le_seure->setInseeCode('17426');
+        $le_seure->setName('Le Seure');
+        $le_seure->setPostalCode('17770');
+        $le_seure->setLatitude('45.791111');
+        $le_seure->setLongitude('-0.365556');
+        $le_seure->setInhabitants('238');
+        $le_seure->setHub($cc_pays_buriaud);
+        $manager->persist($le_seure);
+        
+        $villars_les_bois = new City();
+        $villars_les_bois->setInseeCode('17470');
+        $villars_les_bois->setName('Villars-les-Bois');
+        $villars_les_bois->setPostalCode('17770');
+        $villars_les_bois->setLatitude('45.810833');
+        $villars_les_bois->setLongitude('-0.435833');
+        $villars_les_bois->setInhabitants('249');
+        $villars_les_bois->setHub($cc_pays_buriaud);
+        $manager->persist($villars_les_bois);
         
 /* BusStops *******************************************************************/
         /* Saintes ************************************************************/
