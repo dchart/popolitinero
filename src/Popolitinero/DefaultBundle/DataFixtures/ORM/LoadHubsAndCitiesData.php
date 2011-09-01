@@ -520,6 +520,142 @@ class LoadHubsAndCitiesData implements FixtureInterface
         $triac_lautrait->setHub($cc_jarnac);
         $manager->persist($triac_lautrait);
         
+        /* CC de la région de Châteauneuf *************************************/
+        $cc_chateauneuf = new Hub();
+        $cc_chateauneuf->setName('CC Région Châteauneuf');
+        $cc_chateauneuf->setFullname('Communauté de communes de la région de Châteauneuf');
+        $chateauneuf_sur_charente = new City();
+        $chateauneuf_sur_charente->setInseeCode('16090');
+        $chateauneuf_sur_charente->setName('Châteauneuf-sur-Charente');
+        $chateauneuf_sur_charente->setPostalCode('16120');
+        $chateauneuf_sur_charente->setLatitude('45.5994');
+        $chateauneuf_sur_charente->setLongitude('-0.0525');
+        $chateauneuf_sur_charente->setInhabitants('3422');
+        $cc_chateauneuf->setMasterCity($chateauneuf_sur_charente);
+        $manager->persist($cc_chateauneuf);
+        $chateauneuf_sur_charente->setHub($cc_chateauneuf);
+        $manager->persist($chateauneuf_sur_charente);
+        
+        $angeac_charente = new City();
+        $angeac_charente->setInseeCode('16013');
+        $angeac_charente->setName('Angeac-Charente');
+        $angeac_charente->setPostalCode('16120');
+        $angeac_charente->setLatitude('45.6314');
+        $angeac_charente->setLongitude('-0.0739');
+        $angeac_charente->setInhabitants('380');
+        $angeac_charente->setHub($cc_chateauneuf);
+        $manager->persist($angeac_charente);
+        
+        $bonneuil = new City();
+        $bonneuil->setInseeCode('16050');
+        $bonneuil->setName('Bonneuil');
+        $bonneuil->setPostalCode('16120');
+        $bonneuil->setLatitude('45.5769');
+        $bonneuil->setLongitude('-0.1389');
+        $bonneuil->setInhabitants('254');
+        $bonneuil->setHub($cc_chateauneuf);
+        $manager->persist($bonneuil);
+        
+        $bouteville = new City();
+        $bouteville->setInseeCode('16057');
+        $bouteville->setName('Bouteville');
+        $bouteville->setPostalCode('16120');
+        $bouteville->setLatitude('45.6003');
+        $bouteville->setLongitude('-0.135');
+        $bouteville->setInhabitants('336');
+        $bouteville->setHub($cc_chateauneuf);
+        $manager->persist($bouteville);
+        
+        $champmillon = new City();
+        $champmillon->setInseeCode('16077');
+        $champmillon->setName('Champmillon');
+        $champmillon->setPostalCode('16290');
+        $champmillon->setLatitude('45.6397');
+        $champmillon->setLongitude('0.0006');
+        $champmillon->setInhabitants('526');
+        $champmillon->setHub($cc_chateauneuf);
+        $manager->persist($champmillon);
+        
+        $graves_saint_amant = new City();
+        $graves_saint_amant->setInseeCode('16297');
+        $graves_saint_amant->setName('Graves-Saint-Amant');
+        $graves_saint_amant->setPostalCode('16120');
+        $graves_saint_amant->setLatitude('45.6444');
+        $graves_saint_amant->setLongitude('-0.0928');
+        $graves_saint_amant->setInhabitants('317');
+        $graves_saint_amant->setHub($cc_chateauneuf);
+        $manager->persist($graves_saint_amant);
+        
+        $hiersac = new City();
+        $hiersac->setInseeCode('16163');
+        $hiersac->setName('Hiersac');
+        $hiersac->setPostalCode('16290');
+        $hiersac->setLatitude('45.6694');
+        $hiersac->setLongitude('0.0056');
+        $hiersac->setInhabitants('1074');
+        $hiersac->setHub($cc_chateauneuf);
+        $manager->persist($hiersac);
+        
+        $mosnac = new City();
+        $mosnac->setInseeCode('16233');
+        $mosnac->setName('Mosnac');
+        $mosnac->setPostalCode('16120');
+        $mosnac->setLatitude('45.6197');
+        $mosnac->setLongitude('-0.0178');
+        $mosnac->setInhabitants('458');
+        $mosnac->setHub($cc_chateauneuf);
+        $manager->persist($mosnac);
+        
+        $moulidars = new City();
+        $moulidars->setInseeCode('16234');
+        $moulidars->setName('Moulinars');
+        $moulidars->setPostalCode('16290');
+        $moulidars->setLatitude('45.6622');
+        $moulidars->setLongitude('-0.0367');
+        $moulidars->setInhabitants('717');
+        $moulidars->setHub($cc_chateauneuf);
+        $manager->persist($moulidars);
+        
+        $nonaville = new City();
+        $nonaville->setInseeCode('16247');
+        $nonaville->setName('Nonaville');
+        $nonaville->setPostalCode('16120');
+        $nonaville->setLatitude('45.5272');
+        $nonaville->setLongitude('-0.0919');
+        $nonaville->setInhabitants('190');
+        $nonaville->setHub($cc_chateauneuf);
+        $manager->persist($nonaville);
+        
+        $saint_simeux = new City();
+        $saint_simeux->setInseeCode('16351');
+        $saint_simeux->setName('Saint-Simeux');
+        $saint_simeux->setPostalCode('16120');
+        $saint_simeux->setLatitude('45.6286');
+        $saint_simeux->setLongitude('-0.025');
+        $saint_simeux->setInhabitants('517');
+        $saint_simeux->setHub($cc_chateauneuf);
+        $manager->persist($saint_simeux);
+        
+        $saint_simon = new City();
+        $saint_simon->setInseeCode('16352');
+        $saint_simon->setName('Saint-Simon');
+        $saint_simon->setPostalCode('16120');
+        $saint_simon->setLatitude('45.6506');
+        $saint_simon->setLongitude('0.0747');
+        $saint_simon->setInhabitants('209');
+        $saint_simon->setHub($cc_chateauneuf);
+        $manager->persist($saint_simon);
+        
+        $vibrac = new City();
+        $vibrac->setInseeCode('16402');
+        $vibrac->setName('Vibrac');
+        $vibrac->setPostalCode('16120');
+        $vibrac->setLatitude('45.6439');
+        $vibrac->setLongitude('-0.0617');
+        $vibrac->setInhabitants('296');
+        $vibrac->setHub($cc_chateauneuf);
+        $manager->persist($vibrac);
+        
         /* Save all Hubs and Cities *******************************************/
         $manager->flush();
     }
@@ -529,4 +665,14 @@ class LoadHubsAndCitiesData implements FixtureInterface
         return 1; 
     }
 }
-
+      /*
+        $xxx = new City();
+        $xxx->setInseeCode('');
+        $xxx->setName('');
+        $xxx->setPostalCode('');
+        $xxx->setLatitude('');
+        $xxx->setLongitude('');
+        $xxx->setInhabitant('');
+        $xxx->setHub($yyy);
+        $manager->persist($xxx);
+        */
