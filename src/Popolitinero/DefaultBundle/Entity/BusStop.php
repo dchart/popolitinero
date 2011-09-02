@@ -32,6 +32,7 @@ class BusStop
      * @var object $city
      *
      * @ORM\ManyToOne(targetEntity="Popolitinero\DefaultBundle\Entity\City")
+     * @ORM\JoinColumn(name="city_id", referencedColumnName="id", onDelete="cascade", onUpdate="cascade")
      */
     private $city;
 
@@ -41,28 +42,6 @@ class BusStop
      * @ORM\Column(name="is_famous", type="boolean")
      */
     private $is_famous = false;
-
-    /**
-     * @var boolean $is_terminus
-     *
-     * @ORM\Column(name="is_terminus", type="boolean")
-     */
-    private $is_terminus = false;
-
-    /**
-     * @var boolean $is_on_demand
-     *
-     * @ORM\Column(name="is_on_demand", type="boolean")
-     */
-    private $is_on_demand = false;
-
-    /**
-     * @var boolean $is_train_connected
-     *
-     * @ORM\Column(name="is_train_connected", type="boolean")
-     */
-    private $is_train_connected = false;
-
 
     /**
      * @var decimal $latitude
@@ -78,6 +57,13 @@ class BusStop
      */
     private $longitude;
 
+    /**
+     * @var string __toString
+     */
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     /**
      * Get id
@@ -112,7 +98,7 @@ class BusStop
     /**
      * Set City
      *
-     * @param object $city
+     * @param City $city
      */
     public function setCity(\Popolitinero\DefaultBundle\Entity\City $city)
     {
@@ -122,7 +108,7 @@ class BusStop
     /**
      * Get City
      *
-     * @return object
+     * @return City
      */
     public function getCity()
     {
@@ -147,66 +133,6 @@ class BusStop
     public function getIsFamous()
     {
         return $this->is_famous;
-    }
-
-    /**
-     * Set is_terminus
-     *
-     * @param boolean $isTerminus
-     */
-    public function setIsTerminus($isTerminus)
-    {
-        $this->is_terminus = $isTerminus;
-    }
-
-    /**
-     * Get is_terminus
-     *
-     * @return boolean 
-     */
-    public function getIsTerminus()
-    {
-        return $this->is_terminus;
-    }
-
-    /**
-     * Set is_on_demand
-     *
-     * @param boolean $isOnDemand
-     */
-    public function setIsOnDemand($isOnDemand)
-    {
-        $this->is_on_demand = $isOnDemand;
-    }
-
-    /**
-     * Get is_on_demand
-     *
-     * @return boolean 
-     */
-    public function getIsOnDemand()
-    {
-        return $this->is_on_demand;
-    }
-
-    /**
-     * Set is_train_connected
-     *
-     * @param boolean $isTrainConnected
-     */
-    public function setIsTrainConnected($isTrainConnected)
-    {
-        $this->is_train_connected = $isTrainConnected;
-    }
-
-    /**
-     * Get is_train_connected
-     *
-     * @return boolean 
-     */
-    public function getIsTrainConnected()
-    {
-        return $this->is_train_connected;
     }
 
     /**

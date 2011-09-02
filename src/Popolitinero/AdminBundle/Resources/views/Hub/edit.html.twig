@@ -1,0 +1,77 @@
+{% extends "::admin.html.twig" %}
+{% block title %}Edition de la régie {{entity}} | {{ parent() }}{% endblock %}
+{% block gmapsjs %}
+        <script type="text/javascript">
+          function initialize()
+          {
+            var barycenter  = new google.maps.LatLng({{entity.masterCity.nevralgicPoint.latitude}},{{entity.masterCity.nevralgicPoint.longitude}});
+            var options     = {zoom:14,center:barycenter,mapTypeId:google.maps.MapTypeId.ROADMAP}
+            var map         = new google.maps.Map(document.getElementById("map-canvas"),options);
+            var polyOptionsActive = {strokeColor:'#FF0000',strokeOpacity:0.5,strokeWeight:3,map:map};
+            var polyOptionsInactive = {strokeColor:'#000',strokeOpacity:0.5,strokeWeight:2,map:map};
+            var polyOptionsTrain = {strokeColor:'#004494',strokeOpacity:0.4,strokeWeight:1,map:map};
+            var iconstar = new google.maps.MarkerImage('/images/stars/star.png',new google.maps.Size(22,22),new google.maps.Point(0,0),new google.maps.Point(11,11));
+            var iconstarInactive = new google.maps.MarkerImage('/images/stars/star_inactive.png',new google.maps.Size(22,22),new google.maps.Point(0,0),new google.maps.Point(11,11));
+            var hub = new google.maps.LatLng({{entity.masterCity.nevralgicPoint.latitude}},{{entity.masterCity.nevralgicPoint.longitude}});
+            var markerhub = new google.maps.Marker({position:hub,map:map,title:"{{entity}}",icon:{{entity.isActive?'iconstar':'iconstarInactive'}},draggable:true});
+            var editform = '<div class="infowindow">'
+              +'<h2>{{entity}}</h2>'
+              +'<form action="{{ path('hub_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>'
+              +'{{ form_widget(edit_form) }}'
+              +'<p><button type="submit">Sauvegarder les modifications</button></p>'
+              +'</form>'
+              +'<ul class="record_actions">'
+              +'<li>'
+              +'<a href="{{ path('hub') }}">Cartographie des régies</a>'
+              +'</li>'
+              +'<li>'
+              +'<form action="{{ path('hub_delete', { 'id': entity.id }) }}" method="post">'
+              +'{{ form_widget(delete_form) }}'
+              +'<button type="submit">Détruire toutes les informations concernant cette régie</button>'
+              +'</form>'
+              +'</li>'
+              +'</ul>'
+              +'</div>';
+            var infowindow = new google.maps.InfoWindow({content:editform});
+            infowindow.open(map,markerhub);
+            google.maps.event.addListener(markerhub, 'click', function() {
+              infowindow.open(map,markerhub);
+            });
+            google.maps.event.addListener(markerhub, "drag", function() {
+              updateMarkerPosition(markerhub.getPosition());
+            });            
+            function updateMarkerPosition(latLng) {
+              document.getElementById("popolitinero_adminbundle_hubtype_master_city_nevralgic_point_latitude").value = latLng.lat();
+              document.getElementById("popolitinero_adminbundle_hubtype_master_city_nevralgic_point_longitude").value = latLng.lng();
+            }
+          }
+        </script>
+{% endblock %}
+{% block bodyonload %} onload="initialize()"{% endblock %}
+{% block breadcrumb %}
+        <ul class="xbreadcrumbs" id="breadcrumbs">
+            <li>
+               <a href="{{ path('popolitinero_admin_hubmanager_index') }}" class="home">Popolitinero</a>
+               <ul>
+                   <li><a href="{{ path('hub') }}">Intercommunalités</a></li>
+               </ul>
+            </li>
+            <li><a href="{{ path('hub') }}">Intercommunalités</a>
+              <ul>
+                <li><a href="{{ path('hub_new') }}">Nouvelle intercommunalité</a></li>
+                {% for entity in entities %}
+                   <li><a href="{{ path('hub_show', { 'slug': entity.slug }) }}">{{entity.name}}</a></li>
+                {% endfor %}
+              </ul>
+            </li>
+            <li><a href="{{ path('hub_show', { 'slug': entity.slug }) }}">{{entity}}</a>
+              <ul>
+                <li><a href="{{ path('hub_edit', { 'slug': entity.slug }) }}">Paramètrage ville maitresse</a></li>
+              </ul>
+            </li>
+            <li class="current"><a href="{{ path('hub_edit', { 'slug': entity.slug }) }}">Paramètrage ville maitresse</a></li>
+        </ul>
+{% endblock %}
+{% block body %}
+        <div id="map-canvas"></div>
+{% endblock %}

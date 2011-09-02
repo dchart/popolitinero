@@ -16,17 +16,19 @@ class HubRepository extends EntityRepository
     {
       if($hubslug):
         return $this->getEntityManager()->createQuery('
-          SELECT (MIN(c.latitude)+MAX(c.latitude))/2 AS latitude, (MIN(c.longitude)+MAX(c.longitude))/2 AS longitude
+          SELECT (MIN(b.latitude)+MAX(b.latitude))/2 AS latitude, (MIN(b.longitude)+MAX(b.longitude))/2 AS longitude
           FROM PopolitineroDefaultBundle:Hub h
           LEFT JOIN h.cities c
+          LEFT JOIN c.nevralg
           WHERE h.slug = ?1')
           ->setParameter(1, $hubslug)
           ->getSingleResult();
       else:
         return $this->getEntityManager()->createQuery('
-          SELECT (MIN(c.latitude)+MAX(c.latitude))/2 AS latitude, (MIN(c.longitude)+MAX(c.longitude))/2 AS longitude
+          SELECT (MIN(b.latitude)+MAX(b.latitude))/2 AS latitude, (MIN(b.longitude)+MAX(b.longitude))/2 AS longitude
           FROM PopolitineroDefaultBundle:Hub h
-          LEFT JOIN h.cities c')
+          LEFT JOIN h.cities c          
+          LEFT JOIN c.nevralgic_point b')
           ->getSingleResult();
       endif;
     }

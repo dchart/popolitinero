@@ -1,0 +1,60 @@
+{% extends "::admin.html.twig" %}
+{% block title %}Nouvelle intercommunalité | {{ parent() }}{% endblock %}
+{% block gmapsjs %}
+        <script type="text/javascript">
+          function initialize()
+          {
+            var barycenter  = new google.maps.LatLng({{barycenter.latitude}},{{barycenter.longitude}});
+            var options     = {zoom:11,center:barycenter,mapTypeId:google.maps.MapTypeId.ROADMAP}
+            var map         = new google.maps.Map(document.getElementById("map-canvas"),options);
+            var markernewhub = new google.maps.Marker({position:barycenter,map:map,title:"Ville maitresse de la nouvelle intercommunalité",draggable:true});
+            var newform = '<div class="infowindow">'
+              +'<h2>Nouvelle intercommunalité</h2>'
+              +'<form action="{{ path('hub_create') }}" method="post" {{ form_enctype(form) }}>'
+              +'{{ form_widget(form) }}'
+              +'<p><button type="submit">Inclure cette nouvelle intercommunalité</button></p>'
+              +'</form>'
+              +'<ul class="record_actions">'
+              +'<li>'
+              +'<a href="{{ path('hub') }}">Cartographie des intercommunalités</a>'
+              +'</li>'
+              +'</ul>'
+              +'</div>';
+            var infowindow = new google.maps.InfoWindow({content:newform});
+            infowindow.open(map,markernewhub);
+            google.maps.event.addListener(markernewhub, 'click', function() {
+              infowindow.open(map,markernewhub);
+            });
+            google.maps.event.addListener(markernewhub, "drag", function() {
+              updateMarkerPosition(markernewhub.getPosition());
+            });            
+            function updateMarkerPosition(latLng) {
+              document.getElementById("popolitinero_adminbundle_hubtype_master_city_nevralgic_point_latitude").value = latLng.lat();
+              document.getElementById("popolitinero_adminbundle_hubtype_master_city_nevralgic_point_longitude").value = latLng.lng();
+            }
+          }
+        </script>
+{% endblock %}
+{% block bodyonload %} onload="initialize()"{% endblock %}
+{% block breadcrumb %}
+        <ul class="xbreadcrumbs" id="breadcrumbs">
+            <li>
+               <a href="{{ path('popolitinero_admin_hubmanager_index') }}" class="home">Popolitinero</a>
+               <ul>
+                   <li><a href="{{ path('hub') }}">Intercommunalités</a></li>
+               </ul>
+            </li>
+            <li><a href="{{ path('hub') }}">Intercommunalités</a>
+              <ul>
+                <li><a href="{{ path('hub_new') }}">Nouvelle intercommunalité</a></li>
+                {% for entity in entities %}
+                   <li><a href="{{ path('hub_show', { 'slug': entity.slug }) }}">{{entity.name}}</a></li>
+                {% endfor %}
+              </ul>
+            </li>
+            <li class="current"><a href="{{ path('hub_new') }}">Nouvelle intercommunalité</a></li>
+        </ul>
+{% endblock %}
+{% block body %}
+        <div id="map-canvas"></div>
+{% endblock %}

@@ -61,12 +61,13 @@ h2{
   font-weight: bolder;
   text-align: center;
   margin: 5px;
-  padding: 5px;
+  margin-bottom: 15px;
+  padding: 10px;
   letter-spacing: 1px;
-  text-shadow: 0 0 3px #6a579b;
   border-bottom: 2px solid #6a579b;
 }
 .infowindow{
   width: 500px;
   padding: 10px;
+  text-align: center;
 }

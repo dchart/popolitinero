@@ -2,6 +2,7 @@
 
 namespace Popolitinero\DefaultBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -45,30 +46,6 @@ class City
      * @Assert\NotBlank()
      */
     private $postal_code;
-    
-    /**
-     * @var Hub $hub
-     *
-     * @ORM\ManyToOne(targetEntity="Popolitinero\DefaultBundle\Entity\Hub", inversedBy="cities")
-     * @ORM\JoinColumn(name="hub_id", referencedColumnName="id")
-     */
-    private $hub;
-    
-    /**
-     * @var decimal $latitude
-     *
-     * @ORM\Column(name="latitude", type="decimal", precision=12, scale=8)
-     * @Assert\NotBlank()
-     */
-    private $latitude;
-
-    /**
-     * @var decimal $longitude
-     *
-     * @ORM\Column(name="longitude", type="decimal", precision=12, scale=8)
-     * @Assert\NotBlank()
-     */
-    private $longitude;
 
     /**
      * @var integer $inhabitants
@@ -76,6 +53,21 @@ class City
      * @ORM\Column(name="inhabitants", type="integer")
      */
     private $inhabitants = 0;
+    
+    /**
+     * @var Hub $hub
+     *
+     * @ORM\ManyToOne(targetEntity="Popolitinero\DefaultBundle\Entity\Hub", inversedBy="cities")
+     * @ORM\JoinColumn(name="hub_id", referencedColumnName="id", onDelete="cascade", onUpdate="cascade")
+     */
+    private $hub;
+    
+    /**
+     * @var BusStop $nevralgic_point
+     *
+     * @ORM\OneToOne(targetEntity="Popolitinero\DefaultBundle\Entity\BusStop", mappedBy="city")
+     */
+    private $nevralgic_point;
     
     /**
      * @var string __toString
@@ -154,6 +146,26 @@ class City
     {
         return $this->postal_code;
     }
+    
+    /**
+     * Set inhabitants
+     *
+     * @param integer $inhabitants
+     */
+    public function setInhabitants($inhabitants)
+    {
+        $this->inhabitants = $inhabitants;
+    }
+
+    /**
+     * Get inhabitants
+     *
+     * @return integer 
+     */
+    public function getInhabitants()
+    {
+        return $this->inhabitants;
+    }
 
     /**
      * Set Hub
@@ -176,62 +188,22 @@ class City
     }
     
     /**
-     * Set latitude
+     * Set nevralgic_point
      *
-     * @param decimal $latitude
+     * @param BusStop $nevralgic_point
      */
-    public function setLatitude($latitude)
+    public function setNevralgicPoint(\Popolitinero\DefaultBundle\Entity\BusStop $nevralgicPoint)
     {
-        $this->latitude = $latitude;
+        $this->nevralgic_point = $nevralgicPoint;
     }
 
     /**
-     * Get latitude
+     * Get nevralgic_point
      *
-     * @return decimal 
+     * @return BusStop 
      */
-    public function getLatitude()
+    public function getNevralgicPoint()
     {
-        return $this->latitude;
-    }
-
-    /**
-     * Set longitude
-     *
-     * @param decimal $longitude
-     */
-    public function setLongitude($longitude)
-    {
-        $this->longitude = $longitude;
-    }
-
-    /**
-     * Get longitude
-     *
-     * @return decimal 
-     */
-    public function getLongitude()
-    {
-        return $this->longitude;
-    }
-    
-    /**
-     * Set inhabitants
-     *
-     * @param integer $inhabitants
-     */
-    public function setInhabitants($inhabitants)
-    {
-        $this->inhabitants = $inhabitants;
-    }
-
-    /**
-     * Get inhabitants
-     *
-     * @return integer 
-     */
-    public function getInhabitants()
-    {
-        return $this->inhabitants;
+        return $this->nevralgic_point;
     }
 }

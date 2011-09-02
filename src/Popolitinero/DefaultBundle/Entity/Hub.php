@@ -3,7 +3,7 @@
 namespace Popolitinero\DefaultBundle\Entity;
 
 use SamJ\DoctrineSluggableBundle\SluggableInterface;
-
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -44,18 +44,19 @@ class Hub implements SluggableInterface
      * @var object $master_city
      *
      * @ORM\OneToOne(targetEntity="Popolitinero\DefaultBundle\Entity\City")
+     * @ORM\JoinColumn(name="master_city_id", referencedColumnName="id", onDelete="cascade", onUpdate="cascade")
      */
     private $master_city;
     
     /**
-     * @var integer $coverage_ratio_of_user_needs
+     * @var float $coverage_ratio_of_user_needs
      *
-     * @ORM\Column(name="coverage_ratio_of_user_needs", type="integer", length=2)
+     * @ORM\Column(name="coverage_ratio_of_user_needs", type="float")
      * @Assert\NotBlank()
-     * @Assert\Min(limit = "50", message = "Le taux de couverture doit être compris entre 50 et 95% !")
-     * @Assert\Max(limit = "95", message = "Le taux de couverture doit être compris entre 50 et 95% !")
+     * @Assert\Min(limit = "0.5", message = "Le taux de couverture doit être compris entre 50 et 95% !")
+     * @Assert\Max(limit = "0.95", message = "Le taux de couverture doit être compris entre 50 et 95% !")
      */
-    private $coverage_ratio_of_user_needs = 80;
+    private $coverage_ratio_of_user_needs = 0.8;
 
     /**
      * @var boolean $is_active
@@ -138,7 +139,7 @@ class Hub implements SluggableInterface
     /**
      * Set master_city
      *
-     * @param object $masterCity
+     * @param City $masterCity
      */
     public function setMasterCity(\Popolitinero\DefaultBundle\Entity\City $masterCity)
     {
@@ -148,7 +149,7 @@ class Hub implements SluggableInterface
     /**
      * Get master_city
      *
-     * @return object 
+     * @return City 
      */
     public function getMasterCity()
     {
@@ -158,19 +159,19 @@ class Hub implements SluggableInterface
     /**
      * Set coverage_ratio_of_user_needs
      *
-     * @param integer $coverage_ratio_of_user_needs
+     * @param float $coverage_ratio_of_user_needs
      */
-    public function setCoverageRatioOfUserNeeds($coverage_ratio_of_user_needs)
+    public function setCoverageRatioOfUserNeeds($coverageRatioOfUserNeeds)
     {
-        $this->coverage_ratio_of_user_needs = $coverage_ratio_of_user_needs;
+        $this->coverage_ratio_of_user_needs = $coverageRatioOfUserNeeds;
     }
     
     /**
      * Get coverage_ratio_of_user_needs
      *
-     * @return integer
+     * @return float
      */
-    public function getCoverageRatioOfUserNeeds($coverage_ratio_of_user_needs)
+    public function getCoverageRatioOfUserNeeds()
     {
         return $this->coverage_ratio_of_user_needs;
     }
@@ -211,6 +212,7 @@ class Hub implements SluggableInterface
     {
         return $this->getName();
     }
+    
     public function __construct()
     {
         $this->cities = new \Doctrine\Common\Collections\ArrayCollection();
@@ -219,11 +221,11 @@ class Hub implements SluggableInterface
     /**
      * Add cities
      *
-     * @param Popolitinero\DefaultBundle\Entity\City $cities
+     * @param Popolitinero\DefaultBundle\Entity\City $city
      */
-    public function addCity(\Popolitinero\DefaultBundle\Entity\City $cities)
+    public function addCity(\Popolitinero\DefaultBundle\Entity\City $city)
     {
-        $this->cities[] = $cities;
+        $this->cities[] = $city;
     }
 
     /**

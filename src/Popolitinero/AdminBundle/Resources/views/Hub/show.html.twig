@@ -1,0 +1,47 @@
+{% extends "::admin.html.twig" %}
+{% block title %}L'intercommunalité de la {{entity}} | {{ parent() }}{% endblock %}
+{% block gmapsjs %}
+        <script type="text/javascript">
+          function initialize()
+          {
+            var barycenter  = new google.maps.LatLng({{entity.masterCity.nevralgicPoint.latitude}},{{entity.masterCity.nevralgicPoint.longitude}});
+            var options     = {zoom:12,center:barycenter,mapTypeId:google.maps.MapTypeId.TERRAIN}
+            var map         = new google.maps.Map(document.getElementById("map-canvas"),options);
+            var polyOptionsActive = {strokeColor:'#FF0000',strokeOpacity:0.5,strokeWeight:3,map:map};
+            var polyOptionsInactive = {strokeColor:'#000',strokeOpacity:0.5,strokeWeight:2,map:map};
+            var polyOptionsTrain = {strokeColor:'#004494',strokeOpacity:0.4,strokeWeight:1,map:map};
+            var iconstar = new google.maps.MarkerImage('/images/stars/star.png',new google.maps.Size(22,22),new google.maps.Point(0,0),new google.maps.Point(11,11));
+            var iconstarInactive = new google.maps.MarkerImage('/images/stars/star_inactive.png',new google.maps.Size(22,22),new google.maps.Point(0,0),new google.maps.Point(11,11));
+            var hub = new google.maps.LatLng({{entity.masterCity.nevralgicPoint.latitude}},{{entity.masterCity.nevralgicPoint.longitude}});
+            var markerhub = new google.maps.Marker({position:hub,map:map,title:"{{entity}}",icon:{{entity.isActive?'iconstar':'iconstarInactive'}},draggable:true});
+
+          }
+        </script>
+{% endblock %}
+{% block bodyonload %} onload="initialize()"{% endblock %}
+{% block breadcrumb %}
+        <ul class="xbreadcrumbs" id="breadcrumbs">
+            <li>
+               <a href="{{ path('popolitinero_admin_hubmanager_index') }}" class="home">Popolitinero</a>
+               <ul>
+                   <li><a href="{{ path('hub') }}">Intercommunalités</a></li>
+               </ul>
+            </li>
+            <li><a href="{{ path('hub') }}">Intercommunalités</a>
+              <ul>
+                <li><a href="{{ path('hub_new') }}">Nouvelle intercommunalité</a></li>
+                {% for entity in entities %}
+                   <li><a href="{{ path('hub_show', { 'slug': entity.slug }) }}">{{entity.name}}</a></li>
+                {% endfor %}
+              </ul>
+            </li>
+            <li class="current"><a href="{{ path('hub_show', { 'slug': entity.slug }) }}">{{entity}}</a>
+              <ul>
+                <li><a href="{{ path('hub_edit', { 'slug': entity.slug }) }}">Paramètrage ville maitresse</a></li>
+              </ul>
+            </li>
+        </ul>
+{% endblock %}
+{% block body %}
+        <div id="map-canvas"></div>
+{% endblock %}
