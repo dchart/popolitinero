@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Popolitinero\DefaultBundle\Entity\City
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity()
  */
 class City
 {
@@ -24,18 +24,10 @@ class City
     private $id;
 
     /**
-     * @var string $insee_code
-     *
-     * @ORM\Column(name="insee_code", type="string", length=5)
-     * @Assert\NotBlank()
-     */
-    private $insee_code;
-
-    /**
      * @var string $name
      *
      * @ORM\Column(name="name", type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotNull(message="Veuillez saisir le nom de cette ville !")
      */
     private $name;
 
@@ -43,38 +35,61 @@ class City
      * @var string $postal_code
      *
      * @ORM\Column(name="postal_code", type="string", length=5)
-     * @Assert\NotBlank()
+     * @Assert\NotNull(message="Veuillez saisir un code postal !")
+     * @Assert\MinLength(limit="5", message="Le code postal doit être composé de {{limit}} chiffres !")
+     * @Assert\MaxLength(limit="5", message="Le code postal doit être composé de {{limit}} chiffres !")
      */
     private $postal_code;
 
     /**
-     * @var integer $inhabitants
+     * @var integer $nb_inhabitants
      *
-     * @ORM\Column(name="inhabitants", type="integer")
+     * @ORM\Column(name="nb_inhabitants", type="integer")
+     * @Assert\Min(limit="0", message="Un nombre d'habitants est forcément positif !")
      */
-    private $inhabitants = 0;
+    private $nb_inhabitants = 0;
     
     /**
-     * @var Hub $hub
+     * @var Popolitinero\DefaultBundle\Entity\BusStop $nevralgic_point
      *
-     * @ORM\ManyToOne(targetEntity="Popolitinero\DefaultBundle\Entity\Hub", inversedBy="cities")
-     * @ORM\JoinColumn(name="hub_id", referencedColumnName="id", onDelete="cascade", onUpdate="cascade")
-     */
-    private $hub;
-    
-    /**
-     * @var BusStop $nevralgic_point
-     *
-     * @ORM\OneToOne(targetEntity="Popolitinero\DefaultBundle\Entity\BusStop", mappedBy="city")
+     * @ORM\OneToOne(targetEntity="Popolitinero\DefaultBundle\Entity\BusStop")
+     * @ORM\JoinColumn(name="nevralgic_point_id", referencedColumnName="id")
+     * @Assert\NotNull(message="Cette ville doit être associée à un point névralgique.")
+     * @Assert\Type(type="Popolitinero\DefaultBundle\Entity\BusStop", message="Le point névralgique est incompatible avec {{ type }}.")
      */
     private $nevralgic_point;
     
     /**
-     * @var string __toString
+     * @var Popolitinero\DefaultBundle\Entity\Hub $hub
+     * 
+     * @ORM\ManyToOne(targetEntity="Popolitinero\DefaultBundle\Entity\Hub", inversedBy="cities")
+     * @ORM\JoinColumn(name="hub_id", referencedColumnName="id", onDelete="cascade", onUpdate="cascade")
+     * @Assert\Type(type="Popolitinero\DefaultBundle\Entity\Hub", message="L'intercommunalité est incompatible avec {{ type }}.")
      */
+    protected $hub;
+    
+    /**
+     * @var ArrayCollection $bus_stops
+     *
+     * @ORM\OneToMany(targetEntity="Popolitinero\DefaultBundle\Entity\BusStop", mappedBy="city")
+     * @ORM\OrderBy({"name" = "ASC"})
+     */
+    protected $bus_stops;
+    
+    /**
+     * Constructs a new instance of City
+     */
+    public function __construct()
+    {
+    	$this->bus_stops = new ArrayCollection();
+    }
+    
+    /**
+	 * @return unindented string representation of City()
+	 */
     public function __toString()
     {
-        return $this->name;
+	  return $this->name;
     }
 
     /**
@@ -85,26 +100,6 @@ class City
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set insee_code
-     *
-     * @param string $inseeCode
-     */
-    public function setInseeCode($inseeCode)
-    {
-        $this->insee_code = $inseeCode;
-    }
-
-    /**
-     * Get insee_code
-     *
-     * @return string 
-     */
-    public function getInseeCode()
-    {
-        return $this->insee_code;
     }
 
     /**
@@ -146,64 +141,85 @@ class City
     {
         return $this->postal_code;
     }
-    
+
     /**
-     * Set inhabitants
+     * Set nb_inhabitants
      *
-     * @param integer $inhabitants
+     * @param integer $nbInhabitants
      */
-    public function setInhabitants($inhabitants)
+    public function setNbInhabitants($nbInhabitants)
     {
-        $this->inhabitants = $inhabitants;
+        $this->nb_inhabitants = $nbInhabitants;
     }
 
     /**
-     * Get inhabitants
+     * Get nb_inhabitants
      *
      * @return integer 
      */
-    public function getInhabitants()
+    public function getNbInhabitants()
     {
-        return $this->inhabitants;
+        return $this->nb_inhabitants;
     }
 
     /**
-     * Set Hub
-     *
-     * @param object $hub
-     */
-    public function setHub(\Popolitinero\DefaultBundle\Entity\Hub $hub)
-    {
-        $this->hub = $hub;
-    }
-    
-    /**
-     * Get Hub
-     *
-     * @return object
-     */
-    public function getHub()
-    {
-        return $this->hub;
-    }
-    
-    /**
      * Set nevralgic_point
      *
-     * @param BusStop $nevralgic_point
+     * @param Popolitinero\DefaultBundle\Entity\BusStop $nevralgicPoint
      */
     public function setNevralgicPoint(\Popolitinero\DefaultBundle\Entity\BusStop $nevralgicPoint)
     {
         $this->nevralgic_point = $nevralgicPoint;
+        $this->nevralgic_point->setIsFamous(true);
     }
 
     /**
      * Get nevralgic_point
      *
-     * @return BusStop 
+     * @return Popolitinero\DefaultBundle\Entity\BusStop 
      */
     public function getNevralgicPoint()
     {
         return $this->nevralgic_point;
+    }
+
+    /**
+     * Set hub
+     *
+     * @param Popolitinero\DefaultBundle\Entity\Hub $hub
+     */
+    public function setHub(\Popolitinero\DefaultBundle\Entity\Hub $hub)
+    {
+        $this->hub = $hub;
+    }
+
+    /**
+     * Get hub
+     *
+     * @return Popolitinero\DefaultBundle\Entity\Hub 
+     */
+    public function getHub()
+    {
+        return $this->hub;
+    }
+
+    /**
+     * Add bus_stops
+     *
+     * @param Popolitinero\DefaultBundle\Entity\BusStop $busStops
+     */
+    public function addBusStop(\Popolitinero\DefaultBundle\Entity\BusStop $busStops)
+    {
+        $this->bus_stops[] = $busStops;
+    }
+
+    /**
+     * Get bus_stops
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getBusStops()
+    {
+        return $this->bus_stops;
     }
 }

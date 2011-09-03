@@ -15,13 +15,12 @@ class LoadPopolitineroDefaultBundleData implements FixtureInterface
     public function load($manager)
     {
         $cc_cognac = new Hub();
-        $cc_cognac->setName('CC Cognac');
+        $cc_cognac->setCompactName('CC Cognac');
         $cc_cognac->setFullname('Communauté de communes de Cognac');
         $cognac = new City();
-        $cognac->setInseeCode('16102');
         $cognac->setName('Cognac');
         $cognac->setPostalCode('16100');
-        $cognac->setInhabitants(19006);
+        $cognac->setNbInhabitants(19006);
         $NP_cognac = new BusStop();
         $NP_cognac->setCity($cognac);
         $NP_cognac->setName('Place François 1er');
@@ -36,13 +35,12 @@ class LoadPopolitineroDefaultBundleData implements FixtureInterface
         $manager->persist($cognac);
         
         $cc_pays_buriaud = new Hub();
-        $cc_pays_buriaud->setName('CC Pays Buriaud');
+        $cc_pays_buriaud->setCompactName('CC Pays Buriaud');
         $cc_pays_buriaud->setFullname('Communauté de communes Vignobles et Vals boisés du Pays Buriaud');
         $burie = new City();
-        $burie->setInseeCode('17072');
         $burie->setName('Burie');
         $burie->setPostalCode('17770');
-        $burie->setInhabitants('1259');
+        $burie->setNbInhabitants('1259');
         $NP_burie = new BusStop();
         $NP_burie->setCity($burie);
         $NP_burie->setName('Centre névralgique de Burie');

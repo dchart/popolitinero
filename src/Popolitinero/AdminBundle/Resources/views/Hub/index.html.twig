@@ -13,19 +13,27 @@
             var iconstar = new google.maps.MarkerImage('/images/stars/star.png',new google.maps.Size(22,22),new google.maps.Point(0,0),new google.maps.Point(11,11));
             var iconstarInactive = new google.maps.MarkerImage('/images/stars/star_inactive.png',new google.maps.Size(22,22),new google.maps.Point(0,0),new google.maps.Point(11,11));
             /* Hubs markers */
+            // iconset:twg_retina_icons
             {% for entity in entities %}
               var hub{{entity.id}} = new google.maps.LatLng({{entity.masterCity.nevralgicPoint.latitude}},{{entity.masterCity.nevralgicPoint.longitude}});
               var markerhub{{entity.id}} = new google.maps.Marker({position:hub{{entity.id}},map:map,title:"{{entity}}",icon:{{entity.isActive?'iconstar':'iconstarInactive'}}});
               google.maps.event.addListener(markerhub{{entity.id}}, 'click', function() {
                 new google.maps.InfoWindow({content:  '<div class="infowindow">'+
-                                                      {% if entity.isActive %}
-                                                      '<img src="/images/icons/ok.png" alt="ok" title="Cette intercommunalité adhère à Popolitinero !" />'+
-                                                      {% else %}
-                                                      '<img src="/images/icons/stop.png" alt="stop" title="Cette intercommunalité entame une étude de faisabilité..." />'+                                                      
-                                                      {% endif %}
-                                                      '<h2>{{entity}}</h2>'+
-                                                      '<a href="{{ path('hub_show', { 'slug': entity.slug }) }}"><img src="/images/icons/zoom.png" alt="focus" title="Focus sur l\'intercommunalité de la {{entity}}" /></a>'+
-                                                      '</div>'}).open(map,markerhub{{entity.id}});
+                  {% if entity.isActive %}
+                  '<img src="/images/icons/ok.png" alt="ok" title="Cette intercommunalité adhère au réseau Popolitinero !" />'+
+                  '<h2>{{entity}}</h2>'+
+                  '<a href="{{ path('hub_show', { 'slug': entity.slug }) }}"><img src="/images/icons/zoom.png" alt="focus" title="Focus sur cette intercommunalité" /></a>'+
+                  '<a href="{{ path('hub_show', { 'slug': entity.slug }) }}"><img src="/images/icons/stats.png" alt="stats" title="Consulter les statistiques" /></a>'+
+                  {% else %}
+                  '<img src="/images/icons/stop.png" alt="stop" title="Cette intercommunalité entame une étude de faisabilité..." />'+
+                  '<h2>{{entity}}</h2>'+
+                  '<a href="{{ path('hub_show', { 'slug': entity.slug }) }}"><img src="/images/icons/zoom.png" alt="focus" title="Focus sur cette intercommunalité" /></a>'+
+                  '<a href="{{ path('hub_show', { 'slug': entity.slug }) }}"><img src="/images/icons/valid.png" alt="focus" title="Faire adhérer cette intercommunalité au réseau Popolitinero" /></a>'+
+                  {% endif %}
+                  '<a href="{{ path('hub_show', { 'slug': entity.slug }) }}"><img src="/images/icons/key.png" alt="key" title="Gérer les privilèges d\'administration" /></a>'+
+                  '<a href="{{ path('hub_show', { 'slug': entity.slug }) }}"><img src="/images/icons/save.png" alt="save" title="Sauvegarder les données" /></a>'+
+                  '<a href="{{ path('hub_show', { 'slug': entity.slug }) }}"><img src="/images/icons/paint.png" alt="safe" title="Thème graphique personnalisé" /></a>'+
+                  '</div>'}).open(map,markerhub{{entity.id}});
               });
             {% endfor %}
           }
@@ -44,7 +52,7 @@
               <ul>
                 <li><a href="{{ path('hub_new') }}">Nouvelle intercommunalité</a></li>
                 {% for entity in entities %}
-                   <li><a href="{{ path('hub_show', { 'slug': entity.slug }) }}">{{entity.name}}</a></li>
+                   <li><a href="{{ path('hub_show', { 'slug': entity.slug }) }}">{{entity.compactname}}</a></li>
                 {% endfor %}
               </ul>
             </li>

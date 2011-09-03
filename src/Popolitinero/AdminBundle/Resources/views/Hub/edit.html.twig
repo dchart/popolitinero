@@ -22,7 +22,9 @@
               +'</form>'
               +'<ul class="record_actions">'
               +'<li>'
-              +'<a href="{{ path('hub') }}">Cartographie des régies</a>'
+              +'<img src="/images/icons/checkmark.png" alt="save" title="Sauvegarder les modifications" />'//demo
+              +'<a href="{{ path('hub_show', { 'slug': entity.slug }) }}"><img src="/images/icons/cancel.png" alt="cancel" title="Annuler les modifications" /></a>'              
+              +'<img src="/images/icons/trash.png" alt="delete" title="Détruire toutes les informations concernant cette intercommunalité" />'//demo
               +'</li>'
               +'<li>'
               +'<form action="{{ path('hub_delete', { 'id': entity.id }) }}" method="post">'
@@ -60,16 +62,16 @@
               <ul>
                 <li><a href="{{ path('hub_new') }}">Nouvelle intercommunalité</a></li>
                 {% for entity in entities %}
-                   <li><a href="{{ path('hub_show', { 'slug': entity.slug }) }}">{{entity.name}}</a></li>
+                   <li><a href="{{ path('hub_show', { 'slug': entity.slug }) }}">{{entity}}</a></li>
                 {% endfor %}
               </ul>
             </li>
             <li><a href="{{ path('hub_show', { 'slug': entity.slug }) }}">{{entity}}</a>
               <ul>
-                <li><a href="{{ path('hub_edit', { 'slug': entity.slug }) }}">Paramètrage ville maitresse</a></li>
+                <li><a href="{{ path('hub_edit', { 'slug': entity.slug }) }}">Paramétrage ville maitresse</a></li>
               </ul>
             </li>
-            <li class="current"><a href="{{ path('hub_edit', { 'slug': entity.slug }) }}">Paramètrage ville maitresse</a></li>
+            <li class="current"><a href="{{ path('hub_edit', { 'slug': entity.slug }) }}">Paramétrage ville maitresse</a></li>
         </ul>
 {% endblock %}
 {% block body %}

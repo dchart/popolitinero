@@ -10,10 +10,9 @@ class CityType extends AbstractType
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder
-            ->add('insee_code')
             ->add('name')
             ->add('postal_code')
-            ->add('inhabitants')
+            ->add('nb_inhabitants')
             ->add('nevralgic_point', new BusStopType())
         ;
     }

@@ -10,7 +10,7 @@ class HubType extends AbstractType
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder
-            ->add('name')
+            ->add('compactname')
             ->add('fullname')
             ->add('coverage_ratio_of_user_needs')
             //->add('is_active')

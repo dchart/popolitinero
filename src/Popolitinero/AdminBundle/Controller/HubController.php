@@ -144,12 +144,12 @@ class HubController extends Controller
      *
      * @Route("/{id}/update", name="hub_update")
      * @Method("post")
-     * @Template("PopolitineroDefaultBundle:Hub:edit.html.twig")
+     * @Template("PopolitineroAdminBundle:Hub:edit.html.twig")
      */
     public function updateAction($id)
     {
         $em = $this->getDoctrine()->getEntityManager();
-
+        $entities = $em->getRepository('PopolitineroDefaultBundle:Hub')->findAll();
         $entity = $em->getRepository('PopolitineroDefaultBundle:Hub')->find($id);
 
         if (!$entity) {
@@ -171,6 +171,7 @@ class HubController extends Controller
         }
 
         return array(
+            'entities'    => $entities,
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

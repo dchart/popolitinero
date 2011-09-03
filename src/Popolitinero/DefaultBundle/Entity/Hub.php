@@ -25,26 +25,30 @@ class Hub implements SluggableInterface
     private $id;
 
     /**
-     * @var string $name
-     *
-     * @ORM\Column(name="name", type="string", length=255)
-     * @Assert\NotBlank()
-     */
-    private $name;
-
-    /**
      * @var string $fullname
      *
      * @ORM\Column(name="fullname", type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotNull(message="Veuillez saisir l'intitulé complet de cette intercommunalité !")
+     * @Assert\MaxLength(limit="255", message="Le nom complet de cette intercommunalité ne devrait pas excéder {{limit}} caractères !")
      */
     private $fullname;
+
+    /**
+     * @var string $compact_name
+     *
+     * @ORM\Column(name="compact_name", type="string", length=60)
+     * @Assert\NotNull(message="Veuillez saisir le nom compact de cette intercommunalité !")
+     * @Assert\MaxLength(limit="60", message="Le nom compact de cette intercommunalité ne doit pas excéder {{limit}} caractères !")
+     */
+    private $compact_name;
     
     /**
-     * @var object $master_city
+     * @var Popolitinero\DefaultBundle\Entity\City $master_city
      *
      * @ORM\OneToOne(targetEntity="Popolitinero\DefaultBundle\Entity\City")
-     * @ORM\JoinColumn(name="master_city_id", referencedColumnName="id", onDelete="cascade", onUpdate="cascade")
+     * @ORM\JoinColumn(name="master_city_id", referencedColumnName="id")
+     * @Assert\NotNull(message="Cette intercommunalité doit être associée à une ville maitresse.")
+     * @Assert\Type(type="Popolitinero\DefaultBundle\Entity\City", message="La ville maitresse est incompatible avec {{ type }}.")
      */
     private $master_city;
     
@@ -52,7 +56,7 @@ class Hub implements SluggableInterface
      * @var float $coverage_ratio_of_user_needs
      *
      * @ORM\Column(name="coverage_ratio_of_user_needs", type="float")
-     * @Assert\NotBlank()
+     * @Assert\NotNull(message="Le taux de couverture doit être défini.")
      * @Assert\Min(limit = "0.5", message = "Le taux de couverture doit être compris entre 50 et 95% !")
      * @Assert\Max(limit = "0.95", message = "Le taux de couverture doit être compris entre 50 et 95% !")
      */
@@ -64,7 +68,7 @@ class Hub implements SluggableInterface
      * @ORM\Column(type="boolean")
      */
     private $is_active = false;
-
+    
     /**
      * @var string $slug
      *
@@ -73,19 +77,29 @@ class Hub implements SluggableInterface
     private $slug;
     
     /**
-    * @ORM\OneToMany(targetEntity="Popolitinero\DefaultBundle\Entity\City", mappedBy="hub")
-    *
-    */
-    protected $cities;
-
-    /**
-     * @var string __toString
+     * @var ArrayCollection $cities
+     * 
+     * @ORM\OneToMany(targetEntity="Popolitinero\DefaultBundle\Entity\City", mappedBy="hub")
+     * @ORM\OrderBy({"name" = "ASC"})
      */
-    public function __toString()
+    protected $cities;
+    
+    /**
+     * Constructs a new instance of Hub
+     */
+    public function __construct()
     {
-        return $this->fullname;
+    	$this->cities = new ArrayCollection();
     }
     
+    /**
+	 * @return unindented string representation of Hub()
+	 */
+    public function __toString()
+    {
+	  return $this->compact_name;
+    }
+
     /**
      * Get id
      *
@@ -94,26 +108,6 @@ class Hub implements SluggableInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 
     /**
@@ -137,9 +131,100 @@ class Hub implements SluggableInterface
     }
 
     /**
+     * Set compact_name
+     *
+     * @param string $compactName
+     */
+    public function setCompactName($compactName)
+    {
+        $this->compact_name = $compactName;
+    }
+
+    /**
+     * Get compact_name
+     *
+     * @return string 
+     */
+    public function getCompactName()
+    {
+        return $this->compact_name;
+    }
+
+    /**
+     * Set coverage_ratio_of_user_needs
+     *
+     * @param float $coverageRatioOfUserNeeds
+     */
+    public function setCoverageRatioOfUserNeeds($coverageRatioOfUserNeeds)
+    {
+        $this->coverage_ratio_of_user_needs = $coverageRatioOfUserNeeds;
+    }
+
+    /**
+     * Get coverage_ratio_of_user_needs
+     *
+     * @return float 
+     */
+    public function getCoverageRatioOfUserNeeds()
+    {
+        return $this->coverage_ratio_of_user_needs;
+    }
+
+    /**
+     * Set is_active
+     *
+     * @param boolean $isActive
+     */
+    public function setIsActive($isActive)
+    {
+        $this->is_active = $isActive;
+    }
+
+    /**
+     * Get is_active
+     *
+     * @return boolean 
+     */
+    public function getIsActive()
+    {
+        return $this->is_active;
+    }
+    
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     */
+    public function setSlug($slug)
+    {
+    	if (!empty($this->slug)) return false;
+    	$this->slug = $slug;
+    }
+    
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+    	return $this->slug;
+    }
+    
+    /**
+     * Get slug field(s)
+     *
+     * @return string
+     */
+    public function getSlugFields()
+    {
+    	return $this->getCompactName();
+    }
+    
+    /**
      * Set master_city
      *
-     * @param City $masterCity
+     * @param Popolitinero\DefaultBundle\Entity\City $masterCity
      */
     public function setMasterCity(\Popolitinero\DefaultBundle\Entity\City $masterCity)
     {
@@ -149,83 +234,21 @@ class Hub implements SluggableInterface
     /**
      * Get master_city
      *
-     * @return City 
+     * @return Popolitinero\DefaultBundle\Entity\City 
      */
     public function getMasterCity()
     {
         return $this->master_city;
     }
-    
-    /**
-     * Set coverage_ratio_of_user_needs
-     *
-     * @param float $coverage_ratio_of_user_needs
-     */
-    public function setCoverageRatioOfUserNeeds($coverageRatioOfUserNeeds)
-    {
-        $this->coverage_ratio_of_user_needs = $coverageRatioOfUserNeeds;
-    }
-    
-    /**
-     * Get coverage_ratio_of_user_needs
-     *
-     * @return float
-     */
-    public function getCoverageRatioOfUserNeeds()
-    {
-        return $this->coverage_ratio_of_user_needs;
-    }
-    
-    /**
-     * Set is_active
-     *
-     * @param boolean $is_active
-     */
-    public function setIsActive($is_active)
-    {
-        $this->is_active = $is_active;
-    }
 
-    /**
-     * Get is_active
-     *
-     * @return boolean
-     */
-    public function getIsActive()
-    {
-        return $this->is_active;
-    }
-    
-    /* Slug */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    public function setSlug($slug)
-    {
-        if (!empty($this->slug)) return false;
-        $this->slug = $slug;
-    }
-
-    public function getSlugFields()
-    {
-        return $this->getName();
-    }
-    
-    public function __construct()
-    {
-        $this->cities = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    
     /**
      * Add cities
      *
-     * @param Popolitinero\DefaultBundle\Entity\City $city
+     * @param Popolitinero\DefaultBundle\Entity\City $cities
      */
-    public function addCity(\Popolitinero\DefaultBundle\Entity\City $city)
+    public function addCity(\Popolitinero\DefaultBundle\Entity\City $cities)
     {
-        $this->cities[] = $city;
+        $this->cities[] = $cities;
     }
 
     /**

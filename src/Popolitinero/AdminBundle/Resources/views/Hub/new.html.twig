@@ -48,7 +48,7 @@
               <ul>
                 <li><a href="{{ path('hub_new') }}">Nouvelle intercommunalité</a></li>
                 {% for entity in entities %}
-                   <li><a href="{{ path('hub_show', { 'slug': entity.slug }) }}">{{entity.name}}</a></li>
+                   <li><a href="{{ path('hub_show', { 'slug': entity.slug }) }}">{{entity}}</a></li>
                 {% endfor %}
               </ul>
             </li>
